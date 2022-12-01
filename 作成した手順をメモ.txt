@@ -1,0 +1,158 @@
+【laravel6のインストール】
+//最新版が良ければバージョンの指定は無くてOK
+composer create-project "laravel/laravel=6.*" プロジェクト名 --prefer-dist
+
+【認証機能追加】
+//これでuiの機能がインストールされる感じ？
+composer require laravel/ui="1.*" --dev
+
+//下記のbootstrap --authを実行するなら不要かも
+php artisan ui vue --auth
+
+【これすると上記で作成されたファイルを置き換えるようなので、これだけでいいのかも？】
+php artisan ui bootstrap
+php artisan ui bootstrap --auth
+
+【脆弱性を全修正する】（使わなかった）
+npm audit fix --force
+
+「Error: error:0308010C:digital envelope routines::unsupported」というエラーが発生。
+ググって出てきたstack overflowに記載のあった「set NODE_OPTIONS=--openssl-legacy-provider」する事対処。
+
+DBにsqliteを使用する為、.envとconfig/database.phpを修正。
+DB_CONNECTIONの項目をsqliteに変更する。
+
+ここらでサーバを立ち上げて動作確認、welcomeページが表示されてて、認証機能のリンクが表示されてればOKかな。
+
+【ModelとMigrationファイルを作成】
+php artisan make:model モデル名 -m
+-mのオプションを付けるとMigrationファイルも合わせて作成される。
+
+【Seederファイルの作成】
+php artisan make:seed シーダーファイル名
+
+    "基本的にシーダーファイルにはデータベースに情報を挿入するための
+    ■Eloquant
+    ■DBファサード
+    あたりのどれかが必要となってきます。"
+
+ファサードを使う場合
+use Illuminate\Support\Facades\DB; //追記する
+
+Seederを実行する前に、SeederフォルダにあるDatabaseSeeder.phpに
+作成したSeederファイルを記述する必要がある。
+
+そしてLaravelフォルダ上で下記を実行する
+composer dump-autoload
+    "シーダー機能はPHPのオートロード（つまりはcomposerを使う）を利用しますので上記コマンドが必要となります。"
+
+【シーディングを実行】
+php artisan db:seed
+
+【ルーティングの設定】（web.php）
+コントローラを用いるため、Route::get('アドレス', 'コントローラ@アクション名');という要領で、
+Route::get('/', 'ShopController@index');等とする。
+
+【コントローラの作成】
+php artisan make:controller コントローラ名
+
+【一連の流れ】
+この流れの作成順は、自分なりに分かりやすい順番で作った方がいいかも知れん。
+
+    http://localhost/にアクセス
+    ↓
+    web.phpでルーティング（指定したアドレスにアクセスした時に、どんなアクションをさせるか設定）
+    ↓
+    ShopControllerのindexメソッドを発動（コントローラにページを表示させる記述）
+    ↓
+    上記の通りreturnでshop.blade.phpを返す処理（bladeの表示）
+
+と言う一連の流れが出来上がりました。
+
+【Modelの作成】
+Modelの作成のコマンドに「--m」でMigrationファイルをまとめて作成できるから、
+Modelの作成はもっと早くても良いような。
+
+php artisan make:model Models/Stock
+
+これで、Modelsフォルダ内にStockモデルが作成される。
+このStock.phpはどこにも実際のデータベースのStocksテーブルと結び付ける記述がどこにもありません。
+
+けどLaravelの命名規則で、Modelのクラス名を単数形で指定して、
+テーブル名を複数形にするというのがあるので、それを満たしておけば勝手にLaravelが判断して結びつけてくれます。
+今回だと「Stock」モデルと「Stocks」テーブル。
+他にも「Person」モデルと「Peaple」テーブル。
+
+protected $table = 'test_table';
+などを追記すればそのモデル名とは関係ないテーブルと紐付けも可能です。
+
+protected $guarded = ['id'];（idカラムを保護する）
+protected $fillable = ['id'];（idカラムを編集可能にする）
+
+ログインしている人だけに表示させたい！
+middlewareのauthを使用するだけで実現出来る
+
+    ->middleware('auth')（ルート情報にミドルウェアを使用する記述を行う）
+
+Route::get('/mycart', 'ShopController@myCart')->middleware('auth');
+
+カートに商品を追加
+カートに入れるボタンを<form>で作成、actionにはカートに入れる処理のアドレスを記述する
+
+    <form action="mycart" method="post">
+        @csrf
+        <input type="hidden" name="stock_id" value="{{ $stock->id }}">
+        <input type="submit" value="カートに入れる" class="btn btn-primary">
+    </form>
+
+"ちなみにGET送信とPOST送信の違いがわからない方は、
+・GET送信→普通にアクセス
+・POST送信→formを経由してのアクセス
+くらいの認識で今は十分かなと思います。"
+
+【cssを書く場所】
+/resouces/sassフォルダに、_style.scssファイルを作成、ここにcssを書く。
+同フォルダのapp.scss内に@import 'style';を追記する事で、cssを読み込むようになる。
+
+    "ですが、このままだと反映されません。
+    scss(sass)ファイルはコンパイルしてcssに変換してあげる必要があります。
+    Laravelにはlaravel Mixというビルドツールが最初から入っているので
+    ターミナルから「npm run dev」を実行する事で反映されるようになる"
+
+今回は「npm run dev」でエラーが出るので、レイアウトの<head>に書く事にした。
+
+【public function myCart(Cart $cart)この引数何なん？】
+"メソッドインジェクションです。
+俗に言うDI(依存性注入)の方法の一つですね。
+名前かっこいいですが、でやってくれているのは、
+$cart = new Cart();
+という通常のインスタンス化の記述を不要にしてくれてるくらい"
+
+【変数が空の場合は空文字とする】
+例えば$messageが空の変数だとして、
+{{ $message ?? '' }}
+とすることで、変数の値が空の場合は空文字にする、という事になる。
+$messageのデフォルト値を設定している事になるみたい。
+
+【Modelに書くべき処理とは】
+コントローラが肥大化しすぎないように、DBに関係する処理はModelに書くみたいな感じ。
+
+【コレクションとは？】
+    コレクション(collection)はLaravel独自の形式で配列を操作する機能が拡張されたラッパークラスです。
+    使い方は簡単で配列をコレクション形式に変換後、定義されているメソットを呼び出すことで
+    様々な操作や機能を簡単に実装することができます。
+    またEloquent(エロクアント)の返り値は自動的にコレクション配列に変換されます。
+
+【アロー（->）とダブコロ（::）】
+クラスをインスタンス化したもの（newしたもの）のメソッドを呼び出すときは「->」、
+クラスのメソッドをstaticに呼び出すとき（staticなメソッドを呼び出すとき、つまり、newする必要がないとき）は「::」を使います。
+
+【Mailの返信】
+このコマンドで…
+    php artisan make:mail Thanks --markdown="mails.thanks"
+
+以下のファイルが作成される
+    app/Mails/Thanks.php
+    resources/views/mails/thanks.blade.php
+
+それぞれ、メールの送信機能と、メール内容の本文になる
