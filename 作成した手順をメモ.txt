@@ -28,6 +28,11 @@ DB_CONNECTIONの項目をsqliteに変更する。
 php artisan make:model モデル名 -m
 -mのオプションを付けるとMigrationファイルも合わせて作成される。
 
+【-a オプション】
+php artisan make:model モデル名 -a
+-aオプションを付けると、migration, seeder, factory, resource controllerも作成したModelに合わせて用意してくれる。
+Model名は単数形の名前、テーブル名は複数形の名前である必要があるところも、自動でやってくれちゃう！
+
 【Seederファイルの作成】
 php artisan make:seed シーダーファイル名
 
@@ -42,9 +47,10 @@ use Illuminate\Support\Facades\DB; //追記する
 Seederを実行する前に、SeederフォルダにあるDatabaseSeeder.phpに
 作成したSeederファイルを記述する必要がある。
 
-そしてLaravelフォルダ上で下記を実行する
-composer dump-autoload
-    "シーダー機能はPHPのオートロード（つまりはcomposerを使う）を利用しますので上記コマンドが必要となります。"
+【オートロードを使用出来るようにする？】
+Laravelフォルダ上で下記を実行する
+    composer dump-autoload
+"シーダー機能はPHPのオートロード（つまりはcomposerを使う）を利用しますので上記コマンドが必要となります。"
 
 【シーディングを実行】
 php artisan db:seed
