@@ -15,13 +15,14 @@ return new class extends Migration
     {
         Schema::create('things', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id');
-            $table->varchar('thing');
-            $table->tinyInteger('thing_flag');
-            $table->tinyInteger('good_thing_order');
-            $table->tinyInteger('bad_thing_order');
-            $table->varchar('bad_thing_workaround');
-            $table->tinyInteger('is_deleted');
+            $table->integer('user_id')->comment('ユーザのID');
+            $table->string('thing')->comment('デキゴト');
+            $table->tinyInteger('thing_flag')->comment('0:bad|1:good');
+            $table->tinyInteger('good_thing_order')->comment('イイコトの順位');
+            $table->tinyInteger('bad_thing_order')->comment('ヤナコトの順位');
+            $table->string('bad_thing_workaround')->comment('回避策');
+            $table->tinyInteger('is_deleted')->comment('削除済みフラグ');
+            $table->dateTime('registration_date')->comment('登録日');
             $table->timestamps();
         });
     }

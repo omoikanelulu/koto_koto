@@ -52,6 +52,14 @@ Laravelフォルダ上で下記を実行する
     composer dump-autoload
 "シーダー機能はPHPのオートロード（つまりはcomposerを使う）を利用しますので上記コマンドが必要となります。"
 
+【Seederファイルを作成】
+    use App\Models\モデル名;
+        DB::table('テーブル名')->truncate(); //2回目実行の際にシーダー情報をクリア
+        モデル名::create([
+            'user_id' => 1,
+            'thing' => Str::random(20),
+        ]);
+
 【シーディングを実行】
 php artisan db:seed
 
