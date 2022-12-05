@@ -1,5 +1,5 @@
-@extends('app')
+@extends('layouts.app')
 
 @section('content')
-    <p>index_page</p>
+    <p>インデックスページ</p>
 @endsection

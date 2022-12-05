@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'ThingController@index');
+Route::get('/', [ThingController::class, 'index']);
 
 Auth::routes();
 

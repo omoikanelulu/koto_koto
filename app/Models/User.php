@@ -41,4 +41,12 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * リレーション
+     */
+    public function thing()
+    {
+        return $this->belongsTo(\App\Models\Thing::class);
+    }
 }
