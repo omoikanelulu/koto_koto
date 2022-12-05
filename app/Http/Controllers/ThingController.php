@@ -47,7 +47,7 @@ class ThingController extends Controller
      */
     public function show(Thing $thing)
     {
-        //
+        return view('show');
     }
 
     /**

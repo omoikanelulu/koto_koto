@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\ThingController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ThingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [ThingController::class, 'index']);
+Route::get('/show', [ThingController::class, 'show']);
 
 Auth::routes();
 
