@@ -13,9 +13,10 @@ class ThingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Thing $thing)
     {
-        return view('index');
+        $things = $thing->indexThing();
+        return view('index', compact('things'));
     }
 
     /**
@@ -82,5 +83,16 @@ class ThingController extends Controller
     public function destroy(Thing $thing)
     {
         //
+    }
+
+    /**
+     * ログインしているユーザのIDとデキゴトのuser_idを比較する
+     * 不一致ならabort
+     */
+    public function checkUserId(Thing $thing, int $status = 404)
+    {
+        if (Auth::user->id() != $thing->user_id) {
+            abort($status);
+        }
     }
 }

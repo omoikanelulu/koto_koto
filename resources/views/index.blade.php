@@ -36,5 +36,19 @@
         </div>
     @else
         <p>{{ Auth::user()->name }}さんが、ログインしています</p>
+        <table>
+            @foreach ($things as $thing)
+                <tr>
+                    <th>{{ $thing->registration_date }}</th>
+                </tr>
+                <tr>
+                    <td>{{ $thing->thing }}</td>
+                    <td>{{ $thing->bad_thing_workaround }}</td>
+                </tr>
+            @endforeach
+        </table>
+        <div class="text-center"style="width: 500px;margin: 20px auto;">
+            {{ $things->links() }}
+        </div>
     @endguest
 @endsection

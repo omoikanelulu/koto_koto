@@ -67,6 +67,27 @@ php artisan db:seed
 コントローラを用いるため、Route::get('アドレス', 'コントローラ@アクション名');という要領で、
 Route::get('/', 'ShopController@index');等とする。
 
+【Laravel8以降のルーティングの書き方】
+一覧画面の表示
+    Route::get('/', [BookController::class, 'index'])->name('book.index');
+本の登録画面の表示
+    Route::get('/create', [BookController::class, 'create'])->name('book.create');
+本の登録処理
+    Route::post('/store', [BookController::class, 'store'])->name('book.store');
+本の詳細
+    Route::get('/show/{id}', [BookController::class, 'show'])->name('book.show');
+本の編集画面
+    Route::get('/edit/{id}', [BookController::class, 'edit'])->name('book.edit');
+本の更新処理
+    Route::post('/update/{id}', [BookController::class, 'update'])->name('book.update');
+本の削除
+    Route::post('/destroy{id}', [BookController::class, 'destroy'])->name('book.destroy');
+
+->name(‘book.index’)のように書くと、ルート名に名前をつけられます。
+例えば、ビューで以下のように呼び出すことができ、リンクをクリックするとURLの/に遷移します。
+
+    <a href="{{ route('book.index') }}>一覧画面へ</a>
+
 【コントローラの作成】
 php artisan make:controller コントローラ名
 
@@ -136,20 +157,20 @@ Route::get('/mycart', 'ShopController@myCart')->middleware('auth');
 今回は「npm run dev」でエラーが出るので、レイアウトの<head>に書く事にした。
 
 【public function myCart(Cart $cart)この引数何なん？】
-"メソッドインジェクションです。
-俗に言うDI(依存性注入)の方法の一つですね。
-名前かっこいいですが、でやってくれているのは、
-$cart = new Cart();
-という通常のインスタンス化の記述を不要にしてくれてるくらい"
+    "メソッドインジェクションです。
+    俗に言うDI(依存性注入)の方法の一つですね。
+    名前かっこいいですが、でやってくれているのは、
+    $cart = new Cart();
+    という通常のインスタンス化の記述を不要にしてくれてるくらい"
 
 【変数が空の場合は空文字とする】
-例えば$messageが空の変数だとして、
-{{ $message ?? '' }}
-とすることで、変数の値が空の場合は空文字にする、という事になる。
-$messageのデフォルト値を設定している事になるみたい。
+    例えば$messageが空の変数だとして、
+    {{ $message ?? '' }}
+    とすることで、変数の値が空の場合は空文字にする、という事になる。
+    $messageのデフォルト値を設定している事になるみたい。
 
 【Modelに書くべき処理とは】
-コントローラが肥大化しすぎないように、DBに関係する処理はModelに書くみたいな感じ。
+    コントローラが肥大化しすぎないように、DBに関係する処理はModelに書くみたいな感じ。
 
 【コレクションとは？】
     コレクション(collection)はLaravel独自の形式で配列を操作する機能が拡張されたラッパークラスです。
