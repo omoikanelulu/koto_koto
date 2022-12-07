@@ -88,8 +88,11 @@ Route::get('/', 'ShopController@index');等とする。
 
     <a href="{{ route('book.index') }}>一覧画面へ</a>
 
+【ルーティング一覧を見るコマンド】
+    php artisan route:list
+
 【コントローラの作成】
-php artisan make:controller コントローラ名
+    php artisan make:controller コントローラ名
 
 【一連の流れ】
 この流れの作成順は、自分なりに分かりやすい順番で作った方がいいかも知れん。

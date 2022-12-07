@@ -1,0 +1,69 @@
+@extends('layouts.app')
+
+@section('content')
+    <form class="row g-3" action="store" method="post">
+        @csrf
+        <div class="col-lg-6 offset-lg-3">
+            <label for="thing" class="form-label">デキゴト</label>
+            <textarea class="form-control" name="thing" id="thing" cols="30" rows="5" placeholder="デキゴトを入力"></textarea>
+        </div>
+
+        <div class="col-lg-6 offset-lg-3">
+            <label for="bad_thing_workaround" class="form-label">タイサク</label>
+            <textarea class="form-control" name="bad_thing_workaround" id="bad_thing_workaround" cols="30" rows="10"
+                placeholder="タイサクを入力"></textarea>
+        </div>
+
+        <div class="col-lg-6 offset-lg-3">
+            <label for="">イイコト順位</label>
+            <div class="form-check form-check">
+                <input class="form-check-input" type="radio" name="good_thing_order" id="good_thing_order_0"
+                    value="0" checked>
+                <label class="form-check-label" for="good_thing_order_0">なし</label>
+            </div>
+            <div class="form-check form-check">
+                <input class="form-check-input" type="radio" name="good_thing_order" id="good_thing_order_1"
+                    value="1">
+                <label class="form-check-label" for="good_thing_order_1">すごくイイ</label>
+            </div>
+            <div class="form-check form-check">
+                <input class="form-check-input" type="radio" name="good_thing_order" id="good_thing_order_2"
+                    value="2">
+                <label class="form-check-label" for="good_thing_order_2">イイ</label>
+            </div>
+            <div class="form-check form-check">
+                <input class="form-check-input" type="radio" name="good_thing_order" id="good_thing_order_3"
+                    value="3">
+                <label class="form-check-label" for="good_thing_order_3">ちょっとイイ</label>
+            </div>
+        </div>
+
+        <div class="col-lg-6 offset-lg-3">
+            <label for="">ヤナコト順位</label>
+            <div class="form-check form-check">
+                <input class="form-check-input" type="radio" name="bad_thing_order" id="bad_thing_order_0" value="0"
+                    checked>
+                <label class="form-check-label" for="bad_thing_order_0" checked>なし</label>
+            </div>
+            <div class="form-check form-check">
+                <input class="form-check-input" type="radio" name="bad_thing_order" id="bad_thing_order_1" value="1">
+                <label class="form-check-label" for="bad_thing_order_1">すごくイヤ</label>
+            </div>
+            <div class="form-check form-check">
+                <input class="form-check-input" type="radio" name="bad_thing_order" id="bad_thing_order_2" value="2">
+                <label class="form-check-label" for="bad_thing_order_2">イヤ</label>
+            </div>
+            <div class="form-check form-check">
+                <input class="form-check-input" type="radio" name="bad_thing_order" id="bad_thing_order_3" value="3">
+                <label class="form-check-label" for="bad_thing_order_3">ちょっとイヤ</label>
+            </div>
+        </div>
+
+        <div class="col-lg-6 offset-lg-3">
+            <button type="submit" class="btn btn-primary">記録する</button>
+            <a href="{{ url('/') }}">
+                <button type="button" class="btn btn-secondary">戻る</button>
+            </a>
+        </div>
+    </form>
+@endsection

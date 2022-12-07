@@ -14,8 +14,9 @@ use App\Http\Controllers\ThingController;
 |
 */
 
-Route::get('/', [ThingController::class, 'index']);
-Route::get('/show', [ThingController::class, 'show']);
+Route::get('/', [ThingController::class, 'index'])->name('index');
+Route::get('/show', [ThingController::class, 'show'])->name('show');
+Route::get('/create', [ThingController::class, 'create'])->name('create');
 
 Auth::routes();
 

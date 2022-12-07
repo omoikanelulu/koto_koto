@@ -21,11 +21,11 @@ class ThingSeeder extends Seeder
         for ($i = 0; $i < 20; $i++) {
             Thing::create([
                 'user_id' => 1,
-                'thing' => Str::random(20),
-                'thing_flag' => rand(0, 1),
+                'thing' => Str::random(50),
+                'thing_flag' => rand(0, 3),
                 'good_thing_order' => rand(1, 3),
                 'bad_thing_order' => rand(1, 3),
-                'bad_thing_workaround' => Str::random(100),
+                'bad_thing_workaround' => Str::random(200),
                 'is_deleted' => rand(0, 1),
                 'registration_date' => '2022-12-01 11:20:30',
             ]);

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->integer('user_id')->comment('ユーザのID');
             $table->string('thing')->comment('デキゴト');
-            $table->tinyInteger('thing_flag')->comment('0:bad|1:good');
+            $table->tinyInteger('thing_flag')->comment('0:either_no|1:good|2:bad|3:either_exists');
             $table->tinyInteger('good_thing_order')->comment('イイコトの順位');
             $table->tinyInteger('bad_thing_order')->comment('ヤナコトの順位');
             $table->string('bad_thing_workaround')->comment('回避策');
