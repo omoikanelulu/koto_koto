@@ -25,6 +25,7 @@ class Thing extends Model
 
         return $things;
     }
+
     /**
      * リレーション
      */
