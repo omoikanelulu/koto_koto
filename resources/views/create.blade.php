@@ -1,17 +1,17 @@
 @extends('layouts.app')
 
 @section('content')
-    <form class="row g-3" action="store" method="post">
+    <form class="row g-3" action="{{ route('thing.store') }}" method="post">
         @csrf
         <div class="col-lg-6 offset-lg-3">
             <label for="thing" class="form-label">デキゴト</label>
-            <textarea class="form-control" name="thing" id="thing" cols="30" rows="5" placeholder="デキゴトを入力"></textarea>
+            <textarea class="form-control" name="thing" id="thing" cols="30" rows="5" placeholder="デキゴトを入力">''</textarea>
         </div>
 
         <div class="col-lg-6 offset-lg-3">
             <label for="bad_thing_workaround" class="form-label">タイサク</label>
             <textarea class="form-control" name="bad_thing_workaround" id="bad_thing_workaround" cols="30" rows="10"
-                placeholder="タイサクを入力"></textarea>
+                placeholder="タイサクを入力">''</textarea>
         </div>
 
         <div class="col-lg-6 offset-lg-3">
@@ -61,7 +61,7 @@
 
         <div class="col-lg-6 offset-lg-3">
             <button type="submit" class="btn btn-primary">記録する</button>
-            <a href="{{ url('/') }}">
+            <a href="{{ url('/thing') }}">
                 <button type="button" class="btn btn-secondary">戻る</button>
             </a>
         </div>

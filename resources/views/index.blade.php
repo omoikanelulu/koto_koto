@@ -39,22 +39,39 @@
     @else
         <div class="row">
             <div class="col-lg-12 px-0">
-
-                <p>{{ Auth::user()->name }}さんが、ログインしています</p>
-                <table>
+                <table class="mx-auto">
                     @foreach ($things as $thing)
                         <tr>
-                            <th>{{ $thing->registration_date }}</th>
+                            <th>
+                                <h4>{{ $thing->registration_date }}</h4>
+                            </th>
                         </tr>
                         <tr>
                             <td>{{ $thing->thing }}</td>
-                            <td>{{ $thing->bad_thing_workaround ?? '' }}</td>
+                        </tr>
+                        <tr>
+                            <td class="ps-4">{{ $thing->bad_thing_workaround ?? '' }}</td>
+                        </tr>
+                        <tr>
+                            <td class="d-flex justify-content-end">
+                                <div class="py-3">
+                                    <a href="{{ route('thing.show', $thing) }}"><button type="button"
+                                            class="btn btn-sm btn-outline-primary">詳細</button></a>
+                                    <a href="{{ route('thing.edit', $thing) }}"><button type="button"
+                                            class="btn btn-sm btn-outline-warning">修正</button></a>
+                                    <form class="d-inline" action="destroy" method="post">
+                                        @csrf
+                                        <input type="hidden" name="{{ $thing->id }}">
+                                        <button class="btn-sm btn btn-outline-danger" type="submit">削除</button>
+                                    </form>
+                                </div>
+                            </td>
                         </tr>
                     @endforeach
                 </table>
-                <div class="text-center"style="width: 500px;margin: 20px auto;">
-                    {{ $things->links() }}
-                </div>
+            </div>
+            <div class="text-center"style="width: 500px;margin: 20px auto;">
+                {{ $things->links() }}
             </div>
         </div>
     @endguest

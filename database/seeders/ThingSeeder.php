@@ -27,7 +27,7 @@ class ThingSeeder extends Seeder
                 'bad_thing_order' => rand(1, 3),
                 'bad_thing_workaround' => Str::random(200),
                 'is_deleted' => rand(0, 1),
-                'registration_date' => '2022-12-01 11:20:30',
+                'registration_date' => '2022-12-01 11:20',
             ]);
         }
     }

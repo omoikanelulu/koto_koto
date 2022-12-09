@@ -13,6 +13,8 @@ class Thing extends Model
 
     protected $guarded = [
         'id',
+        'created_at',
+        'updated_at',
     ];
 
     public function indexThing()
@@ -24,6 +26,17 @@ class Thing extends Model
             ->paginate(10);
 
         return $things;
+    }
+
+    public function showThing()
+    {
+        $user_id = Auth::id();
+        $id = $this->id;
+        $thing = $this->where('user_id', $user_id)
+            ->where('id', $id)
+            ->get();
+
+        return $thing;
     }
 
     /**

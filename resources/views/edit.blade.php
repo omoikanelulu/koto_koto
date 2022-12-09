@@ -3,7 +3,7 @@
 @section('content')
     <div class="row">
         <div class="col-lg-12 px-0">
-
+修正画面
             <table>
                 <tr>
                     <th>{{ $thing->registration_date }}</th>

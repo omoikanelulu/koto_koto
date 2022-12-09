@@ -6,6 +6,7 @@ use App\Models\Thing;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreThingRequest;
 use App\Http\Requests\UpdateThingRequest;
+use GuzzleHttp\Psr7\Request;
 
 class ThingController extends Controller
 {
@@ -64,7 +65,9 @@ class ThingController extends Controller
         $thing->is_deleted = $is_deleted;
         $thing->save();
 
-        return redirect(route('/'));
+        // return redirect(route('thing'));
+        return redirect()->route('thing');
+
     }
 
     /**
@@ -75,7 +78,8 @@ class ThingController extends Controller
      */
     public function show(Thing $thing)
     {
-        return view('show');
+        $this->checkUserId($thing);
+        return view('show', compact('thing'));
     }
 
     /**
@@ -86,7 +90,9 @@ class ThingController extends Controller
      */
     public function edit(Thing $thing)
     {
-        //
+        $this->checkUserId($thing);
+        return view('edit', compact('thing'));
+
     }
 
     /**
@@ -109,7 +115,9 @@ class ThingController extends Controller
      */
     public function destroy(Thing $thing)
     {
-        //
+        $this->checkUserId($thing);
+        $thing->delete();
+        return redirect(route('/'));
     }
 
     /**
@@ -119,7 +127,7 @@ class ThingController extends Controller
     public function checkUserId(Thing $thing, int $status = 404)
     {
         if (Auth::user()->id != $thing->user_id) {
-            abort($status);
+            abort($status, 'これはいけません！');
         }
     }
 }
