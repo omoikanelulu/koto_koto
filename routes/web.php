@@ -14,11 +14,23 @@ use App\Http\Controllers\ThingController;
 |
 */
 
-Route::get('/', [ThingController::class, 'index'])->name('/');
-Route::get('/show', [ThingController::class, 'show'])->name('show');
-Route::get('/create', [ThingController::class, 'create'])->name('create');
-Route::post('/store', [ThingController::class, 'store'])->name('store');
+Route::get('/', function () {
+    return redirect('thing');
+});
+
+Route::get('/home', function () {
+    return redirect('thing');
+});
+
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+// Route::get('/', [ThingController::class, 'index'])->name('/');
+// Route::get('/show', [ThingController::class, 'show'])->name('show');
+// Route::get('/create', [ThingController::class, 'create'])->name('create');
+// Route::post('/store', [ThingController::class, 'store'])->name('store');
+// Route::post('/destroy', [ThingController::class, 'destroy'])->name('destroy');
+
+Route::resource('thing', App\Http\Controllers\ThingController::class);
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
