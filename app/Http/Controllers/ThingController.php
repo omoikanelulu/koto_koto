@@ -61,13 +61,13 @@ class ThingController extends Controller
         $thing->fill($request->all());
         $thing->user_id = Auth::user()->id;
         $thing->registration_date = date('Y-m-d H:i');
+        //値がnullの場合、空文字にする
+        $thing->bad_thing_workaround = $thing->bad_thing_workaround == null ? '' : $thing->bad_thing_workaround;
         $thing->thing_flag = $thing_flag;
         $thing->is_deleted = $is_deleted;
         $thing->save();
 
-        // return redirect(route('thing'));
-        return redirect()->route('thing');
-
+        return redirect(route('thing.index'));
     }
 
     /**
@@ -92,7 +92,6 @@ class ThingController extends Controller
     {
         $this->checkUserId($thing);
         return view('edit', compact('thing'));
-
     }
 
     /**
