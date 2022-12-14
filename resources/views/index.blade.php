@@ -55,14 +55,17 @@
                         <tr>
                             <td class="d-flex justify-content-end">
                                 <div class="py-3">
-                                    <a href="{{ route('thing.show', $thing) }}"><button type="button"
-                                            class="btn btn-sm btn-outline-primary">詳細</button></a>
-                                    <a href="{{ route('thing.edit', $thing) }}"><button type="button"
-                                            class="btn btn-sm btn-outline-warning">修正</button></a>
-                                    <form class="d-inline" action="destroy" method="post">
+                                    <a href="{{ route('thing.show', $thing) }}" class="text-decoration-none">
+                                        <button type="button" class="btn btn-sm btn-outline-primary">詳細</button>
+                                    </a>
+                                    <a href="{{ route('thing.edit', $thing) }}" class="text-decoration-none">
+                                        <button type="button" class="btn btn-sm btn-outline-warning">修正</button>
+                                    </a>
+                                    <form class="d-inline" action="{{ route('thing.destroy', $thing) }}" method="post">
+                                        @method('DELETE')
                                         @csrf
-                                        <input type="hidden" name="{{ $thing->id }}">
-                                        <button class="btn-sm btn btn-outline-danger" type="submit">削除</button>
+                                        <button type="submit" onclick="return confirm('削除しますか？');"
+                                            class="btn-sm btn btn-outline-danger">削除</button>
                                     </form>
                                 </div>
                             </td>

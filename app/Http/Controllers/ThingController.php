@@ -116,7 +116,7 @@ class ThingController extends Controller
     {
         $this->checkUserId($thing);
         $thing->delete();
-        return redirect(route('/'));
+        return redirect(route('thing.index'));
     }
 
     /**
@@ -126,7 +126,7 @@ class ThingController extends Controller
     public function checkUserId(Thing $thing, int $status = 404)
     {
         if (Auth::user()->id != $thing->user_id) {
-            abort($status, 'これはいけません！');
+            abort($status, '別ユーザのデキゴトは閲覧出来ません');
         }
     }
 }

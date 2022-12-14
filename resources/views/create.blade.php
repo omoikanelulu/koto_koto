@@ -87,9 +87,9 @@
         </div>
 
         <div class="col-lg-6 offset-lg-3">
-            <button type="submit" class="btn btn-primary">記録する</button>
+            <button type="submit" class="btn btn-sm btn-primary">記録する</button>
             <a href="{{ route('thing.index') }}">
-                <button type="button" class="btn btn-secondary">戻る</button>
+                <button type="button" class="btn btn-sm btn-secondary">戻る</button>
             </a>
         </div>
     </form>
