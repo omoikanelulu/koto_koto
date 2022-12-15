@@ -44,10 +44,9 @@
                             <a href="{{ route('thing.index') }}" class="text-decoration-none">
                                 <button type="button" class="btn btn-sm btn-outline-secondary">戻る</button>
                             </a>
-                            <form class="d-inline" action="{{ route('thing.edit', $thing) }}" method="post">
-                                @csrf
-                                <button type="submit" class="btn btn-sm btn-outline-warning">修正</button>
-                            </form>
+                            <a href="{{ route('thing.edit', $thing) }}" class="text-decoration-none">
+                                <button type="button" class="btn btn-sm btn-outline-warning">修正</button>
+                            </a>
                             <form class="d-inline" action="{{ route('thing.destroy', $thing) }}" method="post">
                                 @method('DELETE')
                                 @csrf
