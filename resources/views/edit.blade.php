@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <form class="row g-3" action="{{ route('thing.update') }}" method="post">
+    <form class="row g-3" action="{{ route('thing.update', $thing) }}" method="post">
         @method('PATCH')
         @csrf
         <div class="col-lg-6 offset-lg-3">
@@ -31,25 +31,25 @@
             <div class="form-check">
                 <input class="form-check-input @error('good_thing_order') is-invalid @enderror" aria-describedby="validate"
                     type="radio" name="good_thing_order" id="good_thing_order_0" value="0"
-                    {{ $thing->good_thing_order == 0 ? checked : '' }}>
+                    {{ $thing->good_thing_order == 0 ? 'checked' : '' }}>
                 <label class="form-check-label" for="good_thing_order_0">なし</label>
             </div>
             <div class="form-check">
                 <input class="form-check-input @error('good_thing_order') is-invalid @enderror" aria-describedby="validate"
                     type="radio" name="good_thing_order" id="good_thing_order_1" value="1"
-                    {{ $thing->good_thing_order == 1 ? checked : '' }}>
+                    {{ $thing->good_thing_order == 1 ? 'checked' : '' }}>
                 <label class="form-check-label" for="good_thing_order_1">すごくイイ</label>
             </div>
             <div class="form-check">
                 <input class="form-check-input @error('good_thing_order') is-invalid @enderror" aria-describedby="validate"
                     type="radio" name="good_thing_order" id="good_thing_order_2" value="2"
-                    {{ $thing->good_thing_order == 2 ? checked : '' }}>
+                    {{ $thing->good_thing_order == 2 ? 'checked' : '' }}>
                 <label class="form-check-label" for="good_thing_order_2">イイ</label>
             </div>
             <div class="form-check">
                 <input class="form-check-input @error('good_thing_order') is-invalid @enderror" aria-describedby="validate"
                     type="radio" name="good_thing_order" id="good_thing_order_3" value="3"
-                    {{ $thing->good_thing_order == 3 ? checked : '' }}>
+                    {{ $thing->good_thing_order == 3 ? 'checked' : '' }}>
                 <label class="form-check-label" for="good_thing_order_3">ちょっとイイ</label>
             </div>
             @error('good_thing_order')
@@ -65,25 +65,25 @@
             <div class="form-check form-check">
                 <input class="form-check-input @error('bad_thing_order') is-invalid @enderror" type="radio"
                     name="bad_thing_order" id="bad_thing_order_0" value="0"
-                    {{ $thing->bad_thing_order == 0 ? checked : '' }}>
+                    {{ $thing->bad_thing_order == 0 ? 'checked' : '' }}>
                 <label class="form-check-label" for="bad_thing_order_0">なし</label>
             </div>
             <div class="form-check form-check">
                 <input class="form-check-input @error('bad_thing_order') is-invalid @enderror" type="radio"
                     name="bad_thing_order" id="bad_thing_order_1" value="1"
-                    {{ $thing->bad_thing_order == 1 ? checked : '' }}>
+                    {{ $thing->bad_thing_order == 1 ? 'checked' : '' }}>
                 <label class="form-check-label" for="bad_thing_order_1">すごくイヤ</label>
             </div>
             <div class="form-check form-check">
                 <input class="form-check-input @error('bad_thing_order') is-invalid @enderror" type="radio"
                     name="bad_thing_order" id="bad_thing_order_2" value="2"
-                    {{ $thing->bad_thing_order == 2 ? checked : '' }}>
+                    {{ $thing->bad_thing_order == 2 ? 'checked' : '' }}>
                 <label class="form-check-label" for="bad_thing_order_2">イヤ</label>
             </div>
             <div class="form-check form-check">
                 <input class="form-check-input @error('bad_thing_order') is-invalid @enderror" type="radio"
                     name="bad_thing_order" id="bad_thing_order_3" value="3"
-                    {{ $thing->bad_thing_order == 3 ? checked : '' }}>
+                    {{ $thing->bad_thing_order == 3 ? 'checked' : '' }}>
                 <label class="form-check-label" for="bad_thing_order_3">ちょっとイヤ</label>
             </div>
             @error('bad_thing_order')
@@ -96,7 +96,7 @@
 
         <div class="col-lg-6 offset-lg-3">
             {{-- <input type="hidden" name="{{ $thing->id }}" value="{{ $thing->id }}"> --}}
-            <button type="submit" class="btn btn-sm btn-primary">記録する</button>
+            <button type="submit" class="btn btn-sm btn-primary">編集する</button>
             <a href="{{ route('thing.index') }}">
                 <button type="button" class="btn btn-sm btn-secondary">戻る</button>
             </a>
