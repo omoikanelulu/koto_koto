@@ -44,8 +44,7 @@
                             <a href="{{ route('thing.index') }}" class="text-decoration-none">
                                 <button type="button" class="btn btn-sm btn-outline-secondary">戻る</button>
                             </a>
-                            <form class="d-inline" action="{{ route('thing.update', $thing) }}" method="post">
-                                @method('PATCH')
+                            <form class="d-inline" action="{{ route('thing.edit', $thing) }}" method="post">
                                 @csrf
                                 <button type="submit" class="btn btn-sm btn-outline-warning">修正</button>
                             </form>
