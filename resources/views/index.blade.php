@@ -73,7 +73,7 @@
                     @endforeach
                 </table>
             </div>
-            <div class="text-center"style="width: 500px;margin: 20px auto;">
+            <div class="d-flex justify-content-center text-center"style="width: 500px;margin: 20px auto;">
                 {{ $things->links() }}
             </div>
         </div>
