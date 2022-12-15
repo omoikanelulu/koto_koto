@@ -103,7 +103,10 @@ class ThingController extends Controller
      */
     public function update(UpdateThingRequest $request, Thing $thing)
     {
-        //
+        $this->checkUserId($thing);
+        $thing->fill($request->all());
+        $thing->save();
+        return redirect(route('thing.show', $thing));
     }
 
     /**
