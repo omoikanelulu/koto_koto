@@ -38,23 +38,25 @@
         </div>
     @else
         <div class="row">
-            <div class="col-lg-12 px-0">
-                <table class="mx-auto">
+            <div class="col-lg-12">
+                <table>
                     @foreach ($things as $thing)
                         <tr>
-                            <th>
-                                <h4>{{ $thing->registration_date }}</h4>
+                            <th class="vw-100">
+                                <h4 class="right-bg-line">{{ $thing->registration_date }}</h4>
                             </th>
                         </tr>
                         <tr>
                             <td>{{ $thing->thing }}</td>
                         </tr>
-                        <tr>
-                            <td class="ps-4">{{ $thing->bad_thing_workaround ?? '' }}</td>
-                        </tr>
+                        @empty(!$thing->bad_thing_workaround)
+                            <tr class="d-flex justify-content-end">
+                                <td class="bad-thing-workaround p-3 rounded-pill">{{ $thing->bad_thing_workaround }}</td>
+                            </tr>
+                        @endempty
                         <tr>
                             <td class="d-flex justify-content-end">
-                                <div class="py-3">
+                                <div class="operation-buttons py-3">
                                     <a href="{{ route('thing.show', $thing) }}" class="text-decoration-none">
                                         <button type="button" class="btn btn-sm btn-outline-primary">詳細</button>
                                     </a>

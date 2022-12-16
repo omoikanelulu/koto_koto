@@ -2,8 +2,8 @@
 
 @section('content')
     <div class="row">
-        <div class="col-lg-12 px-0">
-            <table class="mx-auto">
+        <div class="d-flex justify-content-center col-lg-12">
+            <table>
                 <tr>
                     <th>
                         <h4>{{ $thing->registration_date }}</h4>
