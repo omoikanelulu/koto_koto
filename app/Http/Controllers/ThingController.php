@@ -105,6 +105,8 @@ class ThingController extends Controller
     {
         $this->checkUserId($thing);
         $thing->fill($request->all());
+        //値がnullの場合、空文字にする
+        $thing->bad_thing_workaround = $thing->bad_thing_workaround == null ? '' : $thing->bad_thing_workaround;
         $thing->save();
         return redirect(route('thing.show', $thing));
     }
