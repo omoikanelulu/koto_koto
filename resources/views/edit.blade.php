@@ -7,7 +7,7 @@
         <div class="col-lg-6 offset-lg-3">
             <label for="thing" class="form-label">デキゴト</label>
             <textarea class="form-control @error('thing') is-invalid @enderror" aria-describedby="validate" name="thing"
-                id="thing" cols="30" rows="5">{{ old('thing', $thing->thing) }}</textarea>
+                id="thing" cols="30" rows="5" wrap="hard">{{ old('thing', $thing->thing) }}</textarea>
             @error('thing')
                 <div class="invalid-feedback" id="validate">
                     {{ $message }}
@@ -18,7 +18,7 @@
         <div class="col-lg-6 offset-lg-3">
             <label for="bad_thing_workaround" class="form-label">タイサク</label>
             <textarea class="form-control @error('bad_thing_workaround') is-invalid @enderror" aria-describedby="validate"
-                name="bad_thing_workaround" id="bad_thing_workaround" cols="30" rows="10">{{ old('bad_thing_workaround', $thing->bad_thing_workaround) }}</textarea>
+                name="bad_thing_workaround" id="bad_thing_workaround" cols="30" rows="10" wrap="hard">{{ old('bad_thing_workaround', $thing->bad_thing_workaround) }}</textarea>
             @error('bad_thing_workaround')
                 <div class="invalid-feedback" id="validate">
                     {{ $message }}
@@ -95,7 +95,6 @@
         </div>
 
         <div class="col-lg-6 offset-lg-3">
-            {{-- <input type="hidden" name="{{ $thing->id }}" value="{{ $thing->id }}"> --}}
             <button type="submit" class="btn btn-sm btn-primary">編集する</button>
             <a href="{{ route('thing.index') }}">
                 <button type="button" class="btn btn-sm btn-secondary">戻る</button>

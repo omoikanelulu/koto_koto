@@ -6,7 +6,7 @@
         <div class="col-lg-6 offset-lg-3">
             <label for="thing" class="form-label">デキゴト</label>
             <textarea class="form-control @error('thing') is-invalid @enderror" aria-describedby="validate" name="thing"
-                id="thing" cols="30" rows="5" placeholder="デキゴトを入力">{{ old('thing') }}</textarea>
+                id="thing" cols="30" rows="5" wrap="hard" placeholder="デキゴトを入力">{{ old('thing') }}</textarea>
             @error('thing')
                 <div class="invalid-feedback" id="validate">
                     {{ $message }}
@@ -17,7 +17,7 @@
         <div class="col-lg-6 offset-lg-3">
             <label for="bad_thing_workaround" class="form-label">タイサク</label>
             <textarea class="form-control @error('bad_thing_workaround') is-invalid @enderror" aria-describedby="validate"
-                name="bad_thing_workaround" id="bad_thing_workaround" cols="30" rows="10" placeholder="タイサクを入力">{{ old('bad_thing_workaround') }}</textarea>
+                name="bad_thing_workaround" id="bad_thing_workaround" cols="30" rows="10" wrap="hard" placeholder="タイサクを入力">{{ old('bad_thing_workaround') }}</textarea>
             @error('bad_thing_workaround')
                 <div class="invalid-feedback" id="validate">
                     {{ $message }}
