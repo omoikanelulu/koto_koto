@@ -1,10 +1,15 @@
+.thing {
+    white-space: pre-wrap;
+}
+
 .bad-thing-workaround {
+    white-space: pre-wrap;
     background-color: darken($body-bg, 5%);
 }
 
 .right-bg-line {
     padding: 0.2rem 0;
-    border-image-source: linear-gradient(140deg, $body-bg 4%, darken($body-bg, 50%));
+    border-image-source: linear-gradient(140deg, $body-bg 4%, darken($body-bg, 15%));
     border-image-slice: 0 fill;
     border-image-outset: 0 100vw 0 1rem;
 }
