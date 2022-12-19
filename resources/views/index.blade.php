@@ -41,37 +41,45 @@
             <div class="col-lg-12">
                 <table>
                     @foreach ($things as $thing)
-                        <tr>
-                            <th class="vw-100">
-                                <h4 class="right-bg-line">{{ $thing->registration_date }}</h4>
-                            </th>
-                        </tr>
-                        <tr>
-                            <td>{{ $thing->thing }}</td>
-                        </tr>
-                        @empty(!$thing->bad_thing_workaround)
-                            <tr class="d-flex justify-content-end">
-                                <td class="bad-thing-workaround p-3 rounded-pill">{{ $thing->bad_thing_workaround }}</td>
+                        <div class="">
+                            <tr>
+                                <th class="vw-100">
+                                    <h4 class="right-bg-line">{{ $thing->registration_date }}</h4>
+                                </th>
                             </tr>
+                        </div>
+                        <div class="">
+                            <tr>
+                                <td class="thing">{{ $thing->thing }}</td>
+                            </tr>
+                        </div>
+                        @empty(!$thing->bad_thing_workaround)
+                            <div class="">
+                                <tr class="d-flex justify-content-end">
+                                    <td class="bad-thing-workaround p-3 rounded-pill">{{ $thing->bad_thing_workaround }}</td>
+                                </tr>
+                            </div>
                         @endempty
-                        <tr>
-                            <td class="d-flex justify-content-end">
-                                <div class="operation-buttons py-3">
-                                    <a href="{{ route('thing.show', $thing) }}" class="text-decoration-none">
-                                        <button type="button" class="btn btn-sm btn-outline-primary">詳細</button>
-                                    </a>
-                                    <a href="{{ route('thing.edit', $thing) }}" class="text-decoration-none">
-                                        <button type="button" class="btn btn-sm btn-outline-warning">修正</button>
-                                    </a>
-                                    <form class="d-inline" action="{{ route('thing.destroy', $thing) }}" method="post">
-                                        @method('DELETE')
-                                        @csrf
-                                        <button type="submit" onclick="return confirm('削除しますか？');"
-                                            class="btn-sm btn btn-outline-danger">削除</button>
-                                    </form>
-                                </div>
-                            </td>
-                        </tr>
+                        <div class="">
+                            <tr>
+                                <td class="d-flex justify-content-end">
+                                    <div class="operation-buttons py-3">
+                                        <a href="{{ route('thing.show', $thing) }}" class="text-decoration-none">
+                                            <button type="button" class="btn btn-sm btn-outline-primary">詳細</button>
+                                        </a>
+                                        <a href="{{ route('thing.edit', $thing) }}" class="text-decoration-none">
+                                            <button type="button" class="btn btn-sm btn-outline-warning">修正</button>
+                                        </a>
+                                        <form class="d-inline" action="{{ route('thing.destroy', $thing) }}" method="post">
+                                            @method('DELETE')
+                                            @csrf
+                                            <button type="submit" onclick="return confirm('削除しますか？');"
+                                                class="btn-sm btn btn-outline-danger">削除</button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                        </div>
                     @endforeach
                 </table>
             </div>
