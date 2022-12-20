@@ -1,9 +1,9 @@
-.thing {
-    white-space: pre-wrap;
+table th,
+table td {
+    word-break: break-word;
 }
 
 .bad-thing-workaround {
-    white-space: pre-wrap;
     background-color: darken($body-bg, 5%);
 }
 
