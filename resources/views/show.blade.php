@@ -2,45 +2,53 @@
 
 @section('content')
     <div class="row">
-        <div class="d-flex justify-content-center col-lg-12">
-            <table>
+        <div class="col-lg-10 offset-lg-1">
+            <table class="mb-3">
                 <tr>
-                    <th>
-                        <h4>{{ $thing->registration_date }}</h4>
+                    <th class="vw-100">
+                        <h4 class="right-bg-line">{{ $thing->registration_date }}</h4>
                     </th>
                 </tr>
                 <tr>
-                    <td>{{ $thing->thing }}</td>
+                    <td class="thing">{!! nl2br(e($thing->thing), false) !!}</td>
                 </tr>
-                <tr>
-                    <td class="ps-4">{{ $thing->bad_thing_workaround ?? '' }}</td>
-                </tr>
-                <tr>
-                    <th>当時の気持ち</th>
-                    @if ($thing->good_thing_order == 1)
-                        <td>すごくイイ</td>
-                    @elseif ($thing->good_thing_order == 2)
-                        <td>イイ</td>
-                    @elseif($thing->good_thing_order == 3)
-                        <td>ちょっとイイ</td>
-                    @else
-                        <td>{{ '' }}</td>
-                    @endif
+                @empty(!$thing->bad_thing_workaround)
+                    <tr class="d-flex justify-content-end">
+                        <td class="bad-thing-workaround p-3 rounded-pill">
+                            {!! nl2br(e($thing->bad_thing_workaround), false) !!}</td>
+                    </tr>
+                @endempty
+            </table>
+            @empty(!$thing->thing_flag)
+                <h5 class="border-bottom pb-1">当時のキモチ</h5>
+                <table class="table">
+                    <tr>
+                        @if ($thing->good_thing_order == 1)
+                            <td class="border-0">すごくイイ</td>
+                        @elseif ($thing->good_thing_order == 2)
+                            <td class="border-0">イイ</td>
+                        @elseif($thing->good_thing_order == 3)
+                            <td class="border-0">ちょっとイイ</td>
+                        @else
+                            <td class="border-0">{{ '' }}</td>
+                        @endif
 
-                    @if ($thing->bad_thing_order == 1)
-                        <td>すごくイヤ</td>
-                    @elseif ($thing->bad_thing_order == 2)
-                        <td>イヤ</td>
-                    @elseif($thing->bad_thing_order == 3)
-                        <td>ちょっとイヤ</td>
-                    @else
-                        <td>{{ '' }}</td>
-                    @endif
-                </tr>
+                        @if ($thing->bad_thing_order == 1)
+                            <td class="border-0">すごくイヤ</td>
+                        @elseif ($thing->bad_thing_order == 2)
+                            <td class="border-0">イヤ</td>
+                        @elseif($thing->bad_thing_order == 3)
+                            <td class="border-0">ちょっとイヤ</td>
+                        @else
+                            <td class="border-0">{{ '' }}</td>
+                        @endif
+                    </tr>
+                </table>
+            @endempty
+            <table class="d-flex justify-content-end">
                 <tr>
-                    <td class="d-flex justify-content-end">
-                        <div class="py-3">
-
+                    <td>
+                        <div class="operation-buttons py-3">
                             <a href="{{ route('thing.index') }}" class="text-decoration-none">
                                 <button type="button" class="btn btn-sm btn-outline-secondary">戻る</button>
                             </a>
