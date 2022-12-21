@@ -4,8 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Thing;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Requests\StoreThingRequest;
-use App\Http\Requests\UpdateThingRequest;
+use App\Http\Requests\ThingRequest;
 use GuzzleHttp\Psr7\Request;
 
 class ThingController extends Controller
@@ -34,28 +33,15 @@ class ThingController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreThingRequest  $request
+     * @param  \App\Http\Requests\ThingRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreThingRequest $request)
+    public function store(ThingRequest $request)
     {
         $is_deleted = 0;
 
         //good_thing_orderとbad_thing_orderの値を比較してthing_flagに値を入れる処理
-        $thing_flag = '';
-        if ($request->good_thing_order == 0) {
-            if ($request->bad_thing_order == 0) {
-                $thing_flag = 0;
-            } else {
-                $thing_flag = 2;
-            }
-        } else {
-            if ($request->bad_thing_order == 0) {
-                $thing_flag = 1;
-            } else {
-                $thing_flag = 3;
-            }
-        }
+        $thing_flag = $this->setThingFlag($request);
 
         $thing = new Thing();
         $thing->fill($request->all());
@@ -98,16 +84,19 @@ class ThingController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateThingRequest  $request
+     * @param  \App\Http\Requests\ThingRequest  $request
      * @param  \App\Models\Thing  $thing
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateThingRequest $request, Thing $thing)
+    public function update(ThingRequest $request, Thing $thing)
     {
         $this->checkUserId($thing);
+        $thing_flag = $this->setThingFlag($request);
+
         $thing->fill($request->all());
         //値がnullの場合、空文字にする
         $thing->bad_thing_workaround = $thing->bad_thing_workaround == null ? '' : $thing->bad_thing_workaround;
+        $thing->thing_flag = $thing_flag;
         $thing->save();
         return redirect(route('thing.show', $thing));
     }
@@ -134,6 +123,28 @@ class ThingController extends Controller
         if (Auth::user()->id != $thing->user_id) {
             abort($status, '別ユーザのデキゴトは閲覧出来ません');
         }
+    }
+
+    //good_thing_orderとbad_thing_orderの値を比較してthing_flagに値を入れる処理
+    public function setThingFlag(ThingRequest $request)
+    {
+        $thing_flag = '';
+
+        if ($request->good_thing_order == 0) {
+            if ($request->bad_thing_order == 0) {
+                $thing_flag = 0;
+            } else {
+                $thing_flag = 2;
+            }
+        } else {
+            if ($request->bad_thing_order == 0) {
+                $thing_flag = 1;
+            } else {
+                $thing_flag = 3;
+            }
+        }
+
+        return $thing_flag;
     }
 
     // public function checkOrdersNum(Thing $thing)
