@@ -91,6 +91,7 @@ class ThingController extends Controller
     public function edit(Thing $thing)
     {
         $this->checkUserId($thing);
+        // $this->checkOrdersNum($thing);
         return view('edit', compact('thing'));
     }
 
@@ -134,4 +135,38 @@ class ThingController extends Controller
             abort($status, '別ユーザのデキゴトは閲覧出来ません');
         }
     }
+
+    // public function checkOrdersNum(Thing $thing)
+    // {
+    //     $good_order_num = '';
+
+    //     if ($thing->good_thing_order == 1) {
+    //         $good_order_num = 'すごくイイ';
+    //     } elseif ($thing->good_thing_order == 2) {
+    //         $good_order_num = 'イイ';
+    //     } elseif ($thing->good_thing_order == 3) {
+    //         $good_order_num = 'ちょっとイイ';
+    //     } else {
+    //         $good_order_num = '';
+    //     }
+
+    //     $bad_order_num = '';
+
+    //     if ($thing->bad_thing_order == 1) {
+    //         $bad_order_num = 'すごくイヤ';
+    //     } elseif ($thing->bad_thing_order == 2) {
+    //         $bad_order_num = 'イヤ';
+    //     } elseif ($thing->bad_thing_order == 3) {
+    //         $bad_order_num = 'ちょっとイヤ';
+    //     } else {
+    //         $bad_order_num = '';
+    //     }
+
+    //     $orders_num = array(
+    //         'good_order_num' => $good_order_num,
+    //         'bad_order_num' => $bad_order_num,
+    //     );
+
+    //     return $orders_num;
+    // }
 }
