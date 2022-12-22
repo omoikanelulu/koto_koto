@@ -39,6 +39,9 @@
     @else
         <div class="row">
             <div class="col-lg-10 offset-lg-1">
+                @if(session('message'))
+                <div class="alert alert-success">{{ session('message') }}</div>
+                @endif
                 <table>
                     @foreach ($things as $thing)
                         <tr>

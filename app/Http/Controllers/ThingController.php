@@ -110,7 +110,7 @@ class ThingController extends Controller
     {
         $this->checkUserId($thing);
         $thing->delete();
-        return redirect(route('thing.index'));
+        return redirect(route('thing.index'))->with('message', '削除しました');
     }
 
     /**
