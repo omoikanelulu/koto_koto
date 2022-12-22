@@ -49,7 +49,7 @@
                     </tr>
                 </table>
             @endempty
-            <table class="d-flex justify-content-end">
+            <table class="d-md-flex justify-content-end">
                 <tr>
                     <td>
                         <div class="operation-buttons py-3">

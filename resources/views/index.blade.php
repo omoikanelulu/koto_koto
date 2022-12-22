@@ -55,8 +55,8 @@
                                     {!! nl2br(e($thing->bad_thing_workaround), false) !!}</td>
                             </tr>
                         @endempty
-                        <tr>
-                            <td class="d-flex justify-content-end">
+                        <tr class="d-md-flex justify-content-end">
+                            <td>
                                 <div class="operation-buttons py-3">
                                     <a href="{{ route('thing.show', $thing) }}" class="text-decoration-none">
                                         <button type="button" class="btn btn-sm btn-outline-secondary">詳細</button>
