@@ -40,7 +40,6 @@ class ThingController extends Controller
     {
         $is_deleted = 0;
 
-        //good_thing_orderとbad_thing_orderの値を比較してthing_flagに値を入れる処理
         $thing_flag = $this->setThingFlag($request);
 
         $thing = new Thing();
