@@ -39,8 +39,8 @@
     @else
         <div class="row">
             <div class="col-lg-10 offset-lg-1">
-                @if(session('message'))
-                <div class="alert alert-success">{{ session('message') }}</div>
+                @if (session('message'))
+                    <div class="alert alert-success">{{ session('message') }}</div>
                 @endif
                 <table>
                     @foreach ($things as $thing)
@@ -70,7 +70,7 @@
                                     <form class="d-inline" action="{{ route('thing.destroy', $thing) }}" method="post">
                                         @method('DELETE')
                                         @csrf
-                                        <button type="submit" onclick="return confirm('削除しますか？');"
+                                        <button type="submit" onclick="return confirm('削除しますか？この処理は取り消せません');"
                                             class="btn-sm btn btn-outline-danger">削除</button>
                                     </form>
                                 </div>

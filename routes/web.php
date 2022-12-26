@@ -25,7 +25,12 @@ Route::get('/home', function () {
 });
 
 // Route::resource('thing', App\Http\Controllers\ThingController::class);
-Route::resource('thing', ThingController::class); //この書き方でも行けそう
+Route::resource('/thing', ThingController::class); //この書き方でも行けそう
+
+
+
+// Route::delete('/hardDelete/{id}', [ThingController::class, 'hardDelete'])->name('thing.hardDelete');
+
+
 
 Auth::routes();
-

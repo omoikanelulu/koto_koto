@@ -109,7 +109,8 @@ class ThingController extends Controller
     public function destroy(Thing $thing)
     {
         $this->checkUserId($thing);
-        $thing->delete();
+        // $thing->delete(); //ソフトデリート
+        $thing->forceDelete(); //ハードデリート
         return redirect(route('thing.index'))->with('message', '削除しました');
     }
 
@@ -117,7 +118,7 @@ class ThingController extends Controller
      * ログインしているユーザのIDとデキゴトのuser_idを比較する
      * 不一致ならabort
      */
-    public function checkUserId(Thing $thing, int $status = 404)
+    public function checkUserId(Thing $thing, int $status = 403)
     {
         if (Auth::user()->id != $thing->user_id) {
             abort($status, '別ユーザのデキゴトは閲覧出来ません');
