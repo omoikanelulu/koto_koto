@@ -3,10 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class Thing extends Model
 {
@@ -40,6 +41,20 @@ class Thing extends Model
             ->get();
 
         return $thing;
+    }
+
+    public function monthlyThing(Request $request)
+    {
+        $user_id = Auth::id();
+        $things = $this->where([
+            ['user_id', '=', $user_id],
+            ['registration_date', '>=', $request->search_year . '-01 00:00'],
+        ])
+            ->orderBy('registration_date', 'desc')
+            ->orderBy('id', 'desc')
+            ->get();
+
+        return $things;
     }
 
     /**

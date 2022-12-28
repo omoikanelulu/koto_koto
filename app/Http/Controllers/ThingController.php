@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Thing;
-use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\ThingRequest;
-use GuzzleHttp\Psr7\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 class ThingController extends Controller
 {
@@ -14,10 +14,14 @@ class ThingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Thing $thing)
+    public function index(Thing $thing, Request $request)
     {
-        $things = $thing->indexThing();
-        return view('index', compact('things'));
+        $search_year = $request->input('search_year');
+        $things = $thing->monthlyThing($request);
+        return view('index', compact('things', 'search_year'));
+
+        // $things = $thing->indexThing();
+        // return view('index', compact('things'));
     }
 
     /**
