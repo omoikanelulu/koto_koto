@@ -43,12 +43,12 @@ class Thing extends Model
         return $thing;
     }
 
-    public function monthlyThing($search_year)
+    public function searchThing($search_month)
     {
         $user_id = Auth::id();
         $things = $this->where([
             ['user_id', '=', $user_id],
-            ['registration_date', '>=', $search_year . '-01 00:00'],
+            ['registration_date', '>=', $search_month . '-01 00:00'],
         ])
             ->orderBy('registration_date', 'desc')
             ->orderBy('id', 'desc')

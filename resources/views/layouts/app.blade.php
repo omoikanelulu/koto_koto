@@ -34,7 +34,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
-                        @yield('search_year')
+                        @yield('search_month')
                     </ul>
 
                     <!-- Right Side Of Navbar -->

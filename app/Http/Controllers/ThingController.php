@@ -16,10 +16,10 @@ class ThingController extends Controller
      */
     public function index(Thing $thing, Request $request)
     {
-        // session(['search_year' => date('Y-m')]);
-        $search_year = empty($request->input('search_year')) ? date('Y-m') : $request->input('search_year');
-        $things = $thing->monthlyThing($search_year);
-        return view('index', compact('things', 'search_year'));
+        // session(['search_month' => date('Y-m')]);
+        $search_month = empty($request->input('search_month')) ? date('Y-m') : $request->input('search_month');
+        $things = $thing->searchThing($search_month);
+        return view('index', compact('things', 'search_month'));
     }
 
     /**

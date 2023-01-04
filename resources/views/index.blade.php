@@ -1,14 +1,14 @@
 @extends('layouts.app')
 
-@section('search_year')
+@section('search_month')
     @auth
         <div class="row">
             <div class="col">
                 <li>
                     <form action="{{ route('thing.index') }}" method="get">
                         @csrf
-                        <input class="fs-5 rounded-pill border-0 text-center" type="month" name="search_year" id="search_year"
-                            value="{{ empty($search_year) ? null : $search_year }}">
+                        <input class="fs-5 rounded-pill border-0 text-center" type="month" name="search_month" id="search_month"
+                            value="{{ empty($search_month) ? null : $search_month }}">
                         <input class="btn btn-outline-primary btn-sm" type="submit" value="表示する">
                     </form>
                 </li>
