@@ -2,15 +2,18 @@
 
 @section('search_year')
     @auth
-        <li>
-            <form action="{{ route('thing.index') }}" method="get">
-                @csrf
-                <input class="fs-5 rounded-pill border-0 text-center" type="month" name="search_year" id="search_year"
-                    value="{{ empty($search_year) ? date('Y-m') : $search_year }}">
-
-                <input class="btn btn-outline-primary btn-sm" type="submit" value="表示する">
-            </form>
-        </li>
+        <div class="row">
+            <div class="col">
+                <li>
+                    <form action="{{ route('thing.index') }}" method="get">
+                        @csrf
+                        <input class="fs-5 rounded-pill border-0 text-center" type="month" name="search_year" id="search_year"
+                            value="{{ empty($search_year) ? null : $search_year }}">
+                        <input class="btn btn-outline-primary btn-sm" type="submit" value="表示する">
+                    </form>
+                </li>
+            </div>
+        </div>
     @endauth
 @endsection
 
@@ -93,9 +96,9 @@
                     @endforeach
                 </table>
             </div>
-            {{-- <div class="d-flex justify-content-center text-center"style="width: 500px;margin: 20px auto;">
-                {{ $things->links() }}ここがあやしい！！
-            </div> --}}
+            <div class="d-flex justify-content-center text-center"style="width: 500px;margin: 20px auto;">
+                {{ $things->links() }}
+            </div>
         </div>
     @endguest
 @endsection
