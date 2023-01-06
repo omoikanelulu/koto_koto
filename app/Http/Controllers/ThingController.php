@@ -9,6 +9,11 @@ use Illuminate\Http\Request;
 
 class ThingController extends Controller
 {
+    public function __construct()
+    {
+        // トップページもログインしていないと表示されなくなってしまう…認証の必要が無いところに置かないとダメか？
+        // $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -18,7 +23,11 @@ class ThingController extends Controller
     {
         // session(['search_month' => date('Y-m')]);
         $search_month = empty($request->input('search_month')) ? date('Y-m') : $request->input('search_month');
+
         $things = $thing->searchThing($search_month);
+
+        \Debugbar::info($things);
+
         return view('index', compact('things', 'search_month'));
     }
 

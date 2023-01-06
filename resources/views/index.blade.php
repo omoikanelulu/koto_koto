@@ -8,7 +8,7 @@
                     <form action="{{ route('thing.index') }}" method="get">
                         @csrf
                         <input class="fs-5 rounded-pill border-0 text-center" type="month" name="search_month" id="search_month"
-                            value="{{ empty($search_month) ? null : $search_month }}">
+                            value="{{ $search_month }}">
                         <input class="btn btn-outline-primary btn-sm" type="submit" value="表示する">
                     </form>
                 </li>
@@ -97,7 +97,7 @@
                 </table>
             </div>
             <div class="d-flex justify-content-center text-center"style="width: 500px;margin: 20px auto;">
-                {{ $things->links() }}
+                {{ $things->appends(request()->input())->links() }}
             </div>
         </div>
     @endguest
