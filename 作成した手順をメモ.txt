@@ -92,7 +92,7 @@ Route::get('/', 'ShopController@index');等とする。
     php artisan route:list
 
 【コントローラの作成】
-    php artisan make:controller コントローラ名
+    php artisan make:controller コントローラ名 --resource
 
 【一連の流れ】
 この流れの作成順は、自分なりに分かりやすい順番で作った方がいいかも知れん。
