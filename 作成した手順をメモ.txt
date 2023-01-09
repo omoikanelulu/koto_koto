@@ -107,6 +107,9 @@ Route::get('/', 'ShopController@index');等とする。
 
 と言う一連の流れが出来上がりました。
 
+【アプリケーションの全キャッシュ削除】
+php artisan cache:clear
+
 【Modelの作成】
 Modelの作成のコマンドに「--m」でMigrationファイルをまとめて作成できるから、
 Modelの作成はもっと早くても良いような。
