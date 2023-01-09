@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ThingController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,17 +17,18 @@ use App\Http\Controllers\ThingController;
 
 // Route::get('/', [ThingController::class, 'index'])->name('/');
 Route::get('/', function () {
-    return redirect('thing');
+    return redirect('/thing');
 });
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/home', function () {
-    return redirect('thing');
+    return redirect('/thing');
 });
 
 // Route::resource('thing', App\Http\Controllers\ThingController::class);
 Route::resource('/thing', ThingController::class); //この書き方でも行けそう
 
+Route::resource('/user', UserController::class);
 
 
 // Route::delete('/hardDelete/{id}', [ThingController::class, 'hardDelete'])->name('thing.hardDelete');

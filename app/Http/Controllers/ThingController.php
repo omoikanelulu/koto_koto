@@ -21,14 +21,13 @@ class ThingController extends Controller
      */
     public function index(Thing $thing, Request $request)
     {
-        // session(['search_month' => date('Y-m')]);
         $search_month = empty($request->input('search_month')) ? date('Y-m') : $request->input('search_month');
 
         $things = $thing->searchThing($search_month);
 
         \Debugbar::info($things);
 
-        return view('index', compact('things', 'search_month'));
+        return view('thing.index', compact('things', 'search_month'));
     }
 
     /**
@@ -38,7 +37,7 @@ class ThingController extends Controller
      */
     public function create()
     {
-        return view('create');
+        return view('thing.create');
     }
 
     /**
@@ -75,7 +74,7 @@ class ThingController extends Controller
     public function show(Thing $thing)
     {
         $this->checkUserId($thing);
-        return view('show', compact('thing'));
+        return view('thing.show', compact('thing'));
     }
 
     /**
@@ -87,8 +86,7 @@ class ThingController extends Controller
     public function edit(Thing $thing)
     {
         $this->checkUserId($thing);
-        // $this->checkOrdersNum($thing);
-        return view('edit', compact('thing'));
+        return view('thing.edit', compact('thing'));
     }
 
     /**
@@ -157,38 +155,4 @@ class ThingController extends Controller
 
         return $thing_flag;
     }
-
-    // public function checkOrdersNum(Thing $thing)
-    // {
-    //     $good_order_num = '';
-
-    //     if ($thing->good_thing_order == 1) {
-    //         $good_order_num = 'すごくイイ';
-    //     } elseif ($thing->good_thing_order == 2) {
-    //         $good_order_num = 'イイ';
-    //     } elseif ($thing->good_thing_order == 3) {
-    //         $good_order_num = 'ちょっとイイ';
-    //     } else {
-    //         $good_order_num = '';
-    //     }
-
-    //     $bad_order_num = '';
-
-    //     if ($thing->bad_thing_order == 1) {
-    //         $bad_order_num = 'すごくイヤ';
-    //     } elseif ($thing->bad_thing_order == 2) {
-    //         $bad_order_num = 'イヤ';
-    //     } elseif ($thing->bad_thing_order == 3) {
-    //         $bad_order_num = 'ちょっとイヤ';
-    //     } else {
-    //         $bad_order_num = '';
-    //     }
-
-    //     $orders_num = array(
-    //         'good_order_num' => $good_order_num,
-    //         'bad_order_num' => $bad_order_num,
-    //     );
-
-    //     return $orders_num;
-    // }
 }
