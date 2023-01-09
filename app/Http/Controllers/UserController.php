@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use App\Http\Requests\ThingRequest;
+use App\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
@@ -46,9 +46,10 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $user)
     {
-        //
+        $this->checkUserId($user);
+        return view('show', compact('user'));
     }
 
     /**
@@ -57,9 +58,10 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        //
+        $this->checkUserId($user);
+        return view('edit', compact('user'));
     }
 
     /**
@@ -69,9 +71,13 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UserRequest $request, User $user)
     {
-        //
+        $this->checkUserId($user);
+
+        $user->fill($request->all());
+        $user->save();
+        return redirect('user.show', $user);
     }
 
     /**
@@ -84,4 +90,12 @@ class UserController extends Controller
     {
         //
     }
+
+    public function checkUserId(User $user, int $status = 403)
+    {
+        if (Auth::user()->id != $user->user_id) {
+            abort($status, '別ユーザの情報は閲覧出来ません');
+        }
+    }
+
 }

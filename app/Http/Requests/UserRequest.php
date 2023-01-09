@@ -24,21 +24,20 @@ class UserRequest extends FormRequest
     public function rules()
     {
         return [
-            'thing' => 'required|max:100',
-            'bad_thing_workaround' => 'max:250',
-            'good_thing_order' => 'required',
-            'bad_thing_order' => 'required',
+            'name' => 'required|max:50',
+            'email' => 'required|max:250',
+            'password' => 'required',
         ];
     }
 
     public function messages()
     {
         return [
-            'thing.required' => 'デキゴトは必須入力です',
-            'thing.max' => 'デキゴトは100文字までです',
-            'bad_thing_workaround.max' => 'デキゴトは250文字までです',
-            'good_thing_order.required' => 'いずれかの順位を選択してください',
-            'bad_thing_order.required' => 'いずれかの順位を選択してください',
+            'name.required' => '名前は必須入力です',
+            'name.max' => '名前は50文字までです',
+            'email.required' => 'メールアドレスは必須入力です',
+            'email.max' => 'メールアドレスは250文字までです',
+            'password.required' => 'パスワードは必須入力です',
         ];
     }
 }
