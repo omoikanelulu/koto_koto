@@ -88,6 +88,15 @@ Route::get('/', 'ShopController@index');等とする。
 
     <a href="{{ route('book.index') }}>一覧画面へ</a>
 
+【Resourcefulなメモ】
+/コントローラ               |index
+/コントローラ/create        |create
+/コントローラ               |store（POST送信）
+/コントローラ/番号          |show（番号=id）
+/コントローラ/番号/edit     |edit（番号=id）
+/コントローラ/番号          |update（番号=id、PUT/PATCH送信）
+/コントローラ/番号          |delete（番号=id、DELETE送信）
+
 【ルーティング一覧を見るコマンド】
     php artisan route:list
 
