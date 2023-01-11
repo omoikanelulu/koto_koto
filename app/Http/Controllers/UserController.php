@@ -14,9 +14,11 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(User $user, Request $request)
     {
-        //
+        $users = $user->indexUser();
+
+        return view('user.index', compact('users'));
     }
 
     /**
@@ -48,8 +50,10 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        $this->checkUserId($user);
-        return view('show', compact('user'));
+        // $this->checkUserId($user);
+        $user = $user->showUser();
+        dd($user);
+        return view('user.show', compact('user'));
     }
 
     /**
@@ -97,5 +101,4 @@ class UserController extends Controller
             abort($status, '別ユーザの情報は閲覧出来ません');
         }
     }
-
 }
