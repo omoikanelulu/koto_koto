@@ -31,7 +31,6 @@ Route::resource('/thing', ThingController::class); //この書き方でも行け
 Route::resource('/user', UserController::class);
 
 
-// Route::delete('/hardDelete/{id}', [ThingController::class, 'hardDelete'])->name('thing.hardDelete');
 
 
 
