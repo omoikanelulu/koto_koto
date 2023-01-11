@@ -66,9 +66,7 @@
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     @if (Route::has('user.index'))
-                                        <a class="dropdown-item" href="{{ route('user.index') }}"
-                                            onclick="event.preventDefault();
-                                                     document.getElementById('user-edit-form').submit();">
+                                        <a class="dropdown-item" href="{{ route('user.index') }}">
                                             ユーザ表示
                                         </a>
                                     @endif
@@ -78,13 +76,6 @@
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
-
-                                    @if (Route::has('user.index'))
-                                        <form id="user-edit-form" action="{{ route('user.index') }}" method="POST"
-                                            class="d-none">
-                                            @csrf
-                                        </form>
-                                    @endif
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
