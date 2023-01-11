@@ -21,17 +21,6 @@ class Thing extends Model
         'deleted_at',
     ];
 
-    public function indexThing()
-    {
-        $user_id = Auth::id();
-        $things = $this->where('user_id', $user_id)
-            ->orderBy('registration_date', 'desc')
-            ->orderBy('id', 'desc')
-            ->paginate(10);
-
-        return $things;
-    }
-
     public function showThing()
     {
         $user_id = Auth::id();
