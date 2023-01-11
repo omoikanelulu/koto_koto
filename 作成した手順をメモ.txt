@@ -161,7 +161,7 @@ Route::get('/mycart', 'ShopController@myCart')->middleware('auth');
 くらいの認識で今は十分かなと思います。"
 
 【cssを書く場所】
-/resouces/sassフォルダに、_style.scssファイルを作成、ここにcssを書く。
+/resources/sassフォルダに、_style.scssファイルを作成、ここにcssを書く。
 同フォルダのapp.scss内に@import 'style';を追記する事で、cssを読み込むようになる。
 
     "ですが、このままだと反映されません。
@@ -206,3 +206,6 @@ Route::get('/mycart', 'ShopController@myCart')->middleware('auth');
     resources/views/mails/thanks.blade.php
 
 それぞれ、メールの送信機能と、メール内容の本文になる
+
+【debugbarで変数の中身を表示させる書き方】
+\Debugbar::info($user);
