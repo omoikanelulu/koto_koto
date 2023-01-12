@@ -28,7 +28,8 @@ Route::get('/home', function () {
 // Route::resource('thing', App\Http\Controllers\ThingController::class);
 Route::resource('/thing', ThingController::class); //この書き方でも行けそう
 
-Route::resource('/user', UserController::class);
+Route::resource('/user', UserController::class)->middleware('auth');
+// Route::resource('/user', UserController::class, ['except' => ['index']])->middleware('auth'); // これで除外できるらしいが、上手くいってる気がしない
 
 
 
