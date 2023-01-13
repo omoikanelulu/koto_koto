@@ -25,6 +25,10 @@ Route::get('/home', function () {
     return redirect('/thing');
 });
 
+Route::get('/info', function () {
+    return phpinfo();
+})->middleware('auth');
+
 // Route::resource('thing', App\Http\Controllers\ThingController::class);
 Route::resource('/thing', ThingController::class); //この書き方でも行けそう
 
