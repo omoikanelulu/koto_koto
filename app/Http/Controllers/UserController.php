@@ -77,9 +77,8 @@ class UserController extends Controller
         $this->checkId($user);
 
         $user->fill($request->all());
-        dd($user);
         $user->save();
-        return redirect('user.show');
+        return redirect('thing');
     }
 
     /**

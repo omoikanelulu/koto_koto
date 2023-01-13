@@ -26,7 +26,7 @@ class UserRequest extends FormRequest
         return [
             'name' => 'required|max:50',
             'email' => 'required|max:250',
-            'password' => 'required',
+            // 'password' => 'required',
         ];
     }
 
@@ -37,7 +37,7 @@ class UserRequest extends FormRequest
             'name.max' => '名前は50文字までです',
             'email.required' => 'メールアドレスは必須入力です',
             'email.max' => 'メールアドレスは250文字までです',
-            'password.required' => 'パスワードは必須入力です',
+            // 'password.required' => 'パスワードは必須入力です',
         ];
     }
 }
