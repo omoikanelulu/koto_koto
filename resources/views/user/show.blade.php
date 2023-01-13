@@ -15,7 +15,6 @@
                         <td class="user">{{ $user->email }}</td>
                         <th>登録日</th>
                         <td class="user">{{ $user->created_at->format('Y-m-d') }}</td>
-                        <
                         <div class="operation-buttons py-3">
                             <td>
                                 <a href="{{ route('user.edit', $user) }}" class="text-decoration-none">

@@ -14,11 +14,9 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(User $user, Request $request)
+    public function index()
     {
-        $users = $user->indexUser();
-
-        return view('user.index', compact('users'));
+        return redirect(route('thing.index'));
     }
 
     /**
@@ -28,7 +26,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return redirect(route('thing.index'));
     }
 
     /**
@@ -39,7 +37,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return redirect(route('thing.index'));
     }
 
     /**
@@ -52,7 +50,6 @@ class UserController extends Controller
     {
         // $this->checkUserId($user);
         $user = $user->showUser();
-        dd($user);
         return view('user.show', compact('user'));
     }
 
@@ -64,8 +61,9 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        $this->checkUserId($user);
-        return view('edit', compact('user'));
+        $user = $user->editUser();
+        $this->checkId($user); // これ意味ない
+        return view('user.edit', compact('user'));
     }
 
     /**
@@ -77,7 +75,7 @@ class UserController extends Controller
      */
     public function update(UserRequest $request, User $user)
     {
-        $this->checkUserId($user);
+        $this->checkUserId($user); // 修正必要
 
         $user->fill($request->all());
         $user->save();
@@ -95,9 +93,9 @@ class UserController extends Controller
         //
     }
 
-    public function checkUserId(User $user, int $status = 403)
+    public function checkId(User $user, int $status = 403)
     {
-        if (Auth::user()->id != $user->user_id) {
+        if (Auth::user()->id != $user->id) {
             abort($status, '別ユーザの情報は閲覧出来ません');
         }
     }

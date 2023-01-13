@@ -59,6 +59,14 @@ class User extends Authenticatable
         return $user;
     }
 
+    public function editUser()
+    {
+        $id = Auth::id();
+        $user = $this->where('id', $id)->first();
+
+        return $user;
+    }
+
     /**
      * リレーション
      */

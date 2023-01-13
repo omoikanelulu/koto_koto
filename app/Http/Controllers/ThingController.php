@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Thing;
+// use App\Models\User; // こうすると他のモデルも参照出来る
 use App\Http\Requests\ThingRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -22,12 +23,10 @@ class ThingController extends Controller
     public function index(Thing $thing, Request $request)
     {
         $search_month = empty($request->input('search_month')) ? date('Y-m') : $request->input('search_month');
-
         $things = $thing->searchThing($search_month);
+        $user = Auth::user();
 
-        \Debugbar::info($things);
-
-        return view('thing.index', compact('things', 'search_month'));
+        return view('thing.index', compact('search_month', 'things', 'user'));
     }
 
     /**
