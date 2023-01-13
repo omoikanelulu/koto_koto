@@ -44,13 +44,6 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function indexUser()
-    {
-        $users = $this->all();
-
-        return $users;
-    }
-
     public function showUser()
     {
         $id = Auth::id();
@@ -59,7 +52,7 @@ class User extends Authenticatable
         return $user;
     }
 
-    public function editUser()
+    public function editUserSelect()
     {
         $id = Auth::id();
         $user = $this->where('id', $id)->first();

@@ -65,9 +65,9 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    @if (Route::has('user.edit'))
-                                        <a class="dropdown-item" href="{{ route('user.edit', $user) }}">
-                                            ユーザ情報編集
+                                    @if (Route::has('user.show'))
+                                        <a class="dropdown-item" href="{{ route('user.show', $user) }}">
+                                            ユーザ情報
                                         </a>
                                     @endif
 

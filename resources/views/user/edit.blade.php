@@ -5,10 +5,21 @@
         @method('PATCH')
         @csrf
         <div class="col-lg-6 offset-lg-3">
-            <label for="name" class="form-label">氏名</label>
+            <label for="name" class="form-label">ユーザ名</label>
             <input class="form-control" @error('name') is-invalid @enderror" aria-describedby="validate" type="text"
-                name="name" id="name" value="{{ old('namae', $user->name) }}">
+                name="name" id="name" value="{{ old('name', $user->name) }}">
             @error('name')
+                <div class="invalid-feedback" id="validate">
+                    {{ $message }}
+                </div>
+            @enderror
+        </div>
+
+        <div class="col-lg-6 offset-lg-3">
+            <label for="email" class="form-label">メールアドレス</label>
+            <input class="form-control" @error('email') is-invalid @enderror" aria-describedby="validate" type="text"
+                name="email" id="email" value="{{ old('email', $user->email) }}">
+            @error('email')
                 <div class="invalid-feedback" id="validate">
                     {{ $message }}
                 </div>

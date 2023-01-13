@@ -59,10 +59,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit(User $user, Request $request)
     {
-        $user = $user->editUser();
-        $this->checkId($user); // これ意味ない
+        $user = $user->editUserSelect();
         return view('user.edit', compact('user'));
     }
 
@@ -75,11 +74,12 @@ class UserController extends Controller
      */
     public function update(UserRequest $request, User $user)
     {
-        $this->checkUserId($user); // 修正必要
+        $this->checkId($user);
 
         $user->fill($request->all());
+        dd($user);
         $user->save();
-        return redirect('user.show', $user);
+        return redirect('user.show');
     }
 
     /**
@@ -96,7 +96,7 @@ class UserController extends Controller
     public function checkId(User $user, int $status = 403)
     {
         if (Auth::user()->id != $user->id) {
-            abort($status, '別ユーザの情報は閲覧出来ません');
+            abort($status, 'IDが一致しません');
         }
     }
 }
