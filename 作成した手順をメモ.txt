@@ -131,7 +131,7 @@ php artisan make:model Models/Stock
 けどLaravelの命名規則で、Modelのクラス名を単数形で指定して、
 テーブル名を複数形にするというのがあるので、それを満たしておけば勝手にLaravelが判断して結びつけてくれます。
 今回だと「Stock」モデルと「Stocks」テーブル。
-他にも「Person」モデルと「Peaple」テーブル。
+他にも「Person」モデルと「People」テーブル。
 
 protected $table = 'test_table';
 などを追記すればそのモデル名とは関係ないテーブルと紐付けも可能です。
@@ -209,3 +209,61 @@ Route::get('/mycart', 'ShopController@myCart')->middleware('auth');
 
 【debugbarで変数の中身を表示させる書き方】
 \Debugbar::info($user);
+
+【batファイルでローカルサーバを起動させる方法】
+バッチファイルに以下を記述する
+    @echo off
+    cd C:\Laravel_Dir\koto_koto (Laravel作業フォルダ)
+    cmd /k php artisan serve (コマンドプロンプトで実行するコマンド cmdだけにするとコマンドプロンプトが起動するだけになる)
+
+【Xdebugの導入】
+php -i | clip (クリップボードにphpinfoの情報をコピー)
+
+Xdebugのサイトでphpinfo()の情報を入力する
+https://xdebug.org/wizard
+
+出てきたdllファイルをダウンロードしリネーム、指定されたフォルダに配置php.iniに以下を追記する
+    [Xdebug]
+    zend_extension="C:\xampp\php\ext\php_xdebug.dll"
+    xdebug.mode=debug
+    xdebug.start_with_request=yes
+    xdebug.client_host=127.0.0.1
+    xdebug.client_port =9003
+
+VScodeの「実行とデバッグ」で作成したlaunch.jsonには以下の記述が必要
+    {
+        "name": "Listen for Xdebug",
+        "type": "php",
+        "request": "launch",
+        "port": 9003
+    },
+
+サーバを再起動し、phpinfo()を確認。
+Xdebugの項目が表示されていれば、導入完了。
+
+【VS Codeの拡張機能を一覧表示するコマンド】
+C:\Users\user>code --list-extensions
+// 以下、実行内容
+8amjp.charactercount
+amiralizadeh9480.laravel-extra-intellisense
+bmewburn.vscode-intelephense-client
+bradgashler.htmltagwrap
+christian-kohler.path-intellisense
+donjayamanne.githistory
+ecmel.vscode-html-css
+formulahendry.auto-rename-tag
+glenn2223.live-sass
+mosapride.zenkaku
+mrmlnc.vscode-autoprefixer
+MS-CEINTL.vscode-language-pack-ja
+oderwat.indent-rainbow
+onecentlin.laravel-blade
+onecentlin.laravel5-snippets
+pranaygp.vscode-css-peek
+sdras.night-owl
+shufo.vscode-blade-formatter
+sibiraj-s.vscode-scss-formatter
+streetsidesoftware.code-spell-checker
+vscode-icons-team.vscode-icons
+xabikos.JavaScriptSnippets
+xdebug.php-debug
