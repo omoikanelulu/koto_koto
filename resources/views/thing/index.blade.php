@@ -6,7 +6,7 @@
             <div class="col">
                 <li>
                     <form action="{{ route('thing.index') }}" method="get">
-                        <input class="fs-5 rounded-pill border-0 text-center align-bottom" type="month" name="search_month"
+                        <input class="fs-5 rounded-3 border-0 text-center align-bottom" type="month" name="search_month"
                             id="search_month" value="{{ $search_month }}">
                         <input class="btn btn-outline-primary btn-sm ms-3" type="submit" value="表示する">
                     </form>
@@ -59,7 +59,7 @@
                         </tr>
                         @empty(!$thing->bad_thing_workaround)
                             <tr class="d-flex justify-content-end">
-                                <td class="bad-thing-workaround p-3 rounded-pill">
+                                <td class="bad-thing-workaround p-3 rounded-3">
                                     {!! nl2br(e($thing->bad_thing_workaround), false) !!}</td>
                             </tr>
                         @endempty

@@ -14,7 +14,7 @@
                 </tr>
                 @empty(!$thing->bad_thing_workaround)
                     <tr class="d-flex justify-content-end">
-                        <td class="bad-thing-workaround p-3 rounded-pill">
+                        <td class="bad-thing-workaround p-3 rounded-3">
                             {!! nl2br(e($thing->bad_thing_workaround), false) !!}</td>
                     </tr>
                 @endempty
