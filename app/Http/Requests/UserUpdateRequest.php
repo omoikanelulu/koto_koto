@@ -3,8 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class UserRequest extends FormRequest
+class UserUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,9 +25,16 @@ class UserRequest extends FormRequest
     public function rules()
     {
         return [
+            // パイプで繋げる記述
             'name' => 'required|max:50',
-            'email' => 'required|max:250',
-            // 'password' => 'required',
+
+            // 配列で書く記述
+            'email' => [
+                'required',
+                'max:250',
+                // emailがuniqueである事をチェックするが、userモデルのidである場合は除外する
+                Rule::unique('users')->ignore($this->user->id),
+            ],
         ];
     }
 
@@ -37,7 +45,7 @@ class UserRequest extends FormRequest
             'name.max' => '名前は50文字までです',
             'email.required' => 'メールアドレスは必須入力です',
             'email.max' => 'メールアドレスは250文字までです',
-            // 'password.required' => 'パスワードは必須入力です',
+            'email.unique' => 'そのメールアドレスは使用されています',
         ];
     }
 }
