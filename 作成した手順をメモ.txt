@@ -207,8 +207,20 @@ Route::get('/mycart', 'ShopController@myCart')->middleware('auth');
 
 それぞれ、メールの送信機能と、メール内容の本文になる
 
-【debugbarで変数の中身を表示させる書き方】
-\Debugbar::info($user);
+【デバッグバーを導入しよう】
+ターミナルでコマンドを実行。
+composer require barryvdh/laravel-debugbar
+
+envファイルで下記のようにtrueにする。
+APP_DEBUG=true
+
+composer.jsonにデバッグバーの記述が書かれていればOK
+
+デバッグバーにメッセージを表示させる
+\Debugbar::info($things); // コントローラ等に書いて使う
+
+参考サイト
+https://migisanblog.com/laravel-debugbar-install/
 
 【batファイルでローカルサーバを起動させる方法】
 バッチファイルに以下を記述する
