@@ -35,7 +35,7 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store()
     {
         return redirect(route('thing.index'));
     }
@@ -48,8 +48,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        // $this->checkUserId($user);
-        $user = $user->showUser();
+        $this->checkId($user);
         return view('user.show', compact('user'));
     }
 
@@ -61,7 +60,7 @@ class UserController extends Controller
      */
     public function edit(User $user, Request $request)
     {
-        $user = $user->editUserSelect();
+        $this->checkId($user);
         return view('user.edit', compact('user'));
     }
 
@@ -87,9 +86,13 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user, $id)
     {
-        //
+        // 退会手続きを実行したら、退会完了のメッセージ画面を出して、TOP画面のリンクを貼る
+        $this->checkId($user);
+        
+        $user->delete();
+        redirect('/thing')
     }
 
     public function checkId(User $user, int $status = 403)
