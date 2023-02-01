@@ -253,6 +253,14 @@ VScodeの「実行とデバッグ」で作成したlaunch.jsonには以下の記
 サーバを再起動し、phpinfo()を確認。
 Xdebugの項目が表示されていれば、導入完了。
 
+【GitHubからローカル環境へcloneする】
+クローンを作成したい場所で以下のコマンドを実行する
+
+    git clone https://github.com/<user-name>/<repository-name>.git
+
+GitHubのリモートリポジトリからcloneのコマンドをコピーする事も出来る
+ローカルの端末でGitの設定を終わらせていれば、これだけでプッシュも出来るようになる。
+
 【VS Codeの拡張機能を一覧表示するコマンド】
 C:\Users\user>code --list-extensions
 // 以下、実行内容
