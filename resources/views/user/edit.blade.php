@@ -28,6 +28,15 @@
 
         <div class="col-lg-6 offset-lg-3">
             <button type="submit" class="btn btn-sm btn-primary">変更する</button>
+
+            {{-- // 2023_0201 記述中 --}}
+            <form class="d-inline" action="{{ route('user.destroy', $user) }}" method="post">
+                @method('DELETE')
+                @csrf
+                <button type="submit" onclick="return confirm('退会しますか？この処理は取り消せません');"
+                    class="btn-sm btn btn-danger">退会する</button>
+            </form>
+
             <a href="{{ route('thing.index') }}">
                 <button type="button" class="btn btn-sm btn-secondary">戻る</button>
             </a>
