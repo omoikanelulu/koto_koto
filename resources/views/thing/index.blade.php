@@ -85,6 +85,7 @@
                 </table>
             </div>
             <div class="d-flex justify-content-center text-center"style="width: 500px;margin: 20px auto;">
+                {{-- appends()で検索条件を引き継いでいる --}}
                 {{ $things->appends(request()->input())->links() }}
             </div>
         </div>
