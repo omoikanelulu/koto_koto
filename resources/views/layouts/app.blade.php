@@ -22,7 +22,7 @@
     <div id="app">
         <nav class="sticky-sm-top navbar navbar-expand-lg navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/thing') }}">
+                <a class="navbar-brand" href="{{ url('/top') }}">
                     {{ config('app.name', 'Laravel') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -65,12 +65,13 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    @if (Route::has('user.show'))
+                                    @if (isset($user))
                                         <a class="dropdown-item" href="{{ route('user.show', $user) }}">
                                             ユーザ情報
                                         </a>
                                     @endif
 
+                                    {{-- ログアウトボタン --}}
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
