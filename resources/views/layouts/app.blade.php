@@ -22,9 +22,15 @@
     <div id="app">
         <nav class="sticky-sm-top navbar navbar-expand-lg navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/top') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
+                @if (auth()->check())
+                    <a class="navbar-brand" href="{{ url('/thing') }}">
+                        {{ config('app.name', 'Laravel') }}
+                    </a>
+                @else
+                    <a class="navbar-brand" href="{{ url('/top') }}">
+                        {{ config('app.name', 'Laravel') }}
+                    </a>
+                @endif
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
