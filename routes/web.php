@@ -15,28 +15,36 @@ use App\Http\Controllers\UserController;
 |
 */
 
+Auth::routes();
+
 // Route::get('/', [ThingController::class, 'index'])->name('/');
 Route::get('/', function () {
-    return redirect('/thing');
+    return redirect('/top');
 });
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/home', function () {
-    return redirect('/thing');
-});
+// Route::get('/home', function () {
+//     return redirect('/top');
+// });
 
+// phpinfo()を表示する
 Route::get('/info', function () {
     return phpinfo();
-})->middleware('auth');
+});
 
-// Route::resource('thing', App\Http\Controllers\ThingController::class);
-Route::resource('/thing', ThingController::class); //この書き方でも行けそう
+// トップページ
+Route::get('/top', function () {
+    return view('layouts.top');
+});
 
-Route::resource('/user', UserController::class)->middleware('auth');
-// Route::resource('/user', UserController::class, ['except' => ['index']])->middleware('auth'); // これで除外できるらしいが、上手くいってる気がしない
+// ユーザを削除してサンクスページを出す試み
+// アクションを指定する時は[]で囲む必要があるっぽい 【例】[コントローラ名::class, アクション名]
+Route::get('/thanks', function () {
+    return view('thanks.thanks');
+});
 
-
-
-
-
-Auth::routes();
+// middleware('auth')をかけるグループ
+Route::middleware(['auth'])->group(function () {
+    Route::resource('/user', UserController::class);
+    Route::resource('/thing', ThingController::class);
+});
