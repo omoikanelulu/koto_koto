@@ -86,13 +86,17 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user, $id)
+    public function destroy(User $user)
     {
-        // 退会手続きを実行したら、退会完了のメッセージ画面を出して、TOP画面のリンクを貼る
         $this->checkId($user);
-        
         $user->delete();
-        redirect('/thing')
+
+        // $userが削除され、存在しなければリダイレクトさせる
+        if ($user->exists()) {
+            return redirect('/thanks');
+        } else {
+            abort('', '処理に失敗しました');
+        }
     }
 
     public function checkId(User $user, int $status = 403)
