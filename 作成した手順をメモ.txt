@@ -116,6 +116,12 @@ Route::get('/', 'ShopController@index');等とする。
 
 と言う一連の流れが出来上がりました。
 
+【ログインした後どのページredirectするのか】
+デフォルトでは、AuthenticatesUsersトレイトで使用される$redirectTo変数で指定されます。
+これは、App\Http\Controllers\Auth\LoginControllerクラスで定義されていて、
+    protected $redirectTo = '/thing';
+このように変更するとリダイレクト先を変更できる。
+
 【アプリケーションの全キャッシュ削除】
 php artisan cache:clear
 
