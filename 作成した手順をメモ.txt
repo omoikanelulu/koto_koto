@@ -266,10 +266,20 @@ git config -l（またはgit config --list）で、
 【GitHubからローカル環境へcloneする】
 クローンを作成したい場所で以下のコマンドを実行する
 
+    // GitHubが見られるなら、codeのメニューからhttpsでcloneするコマンドをコピペするのが早い
     git clone https://github.com/<user-name>/<repository-name>.git
 
 GitHubのリモートリポジトリからcloneのコマンドをコピーする事も出来る
 ローカルの端末でGitの設定を終わらせていれば、これだけでプッシュも出来るようになる。
+
+【XAMPPのインストールし直し覚書】
+XAMPPのアンインストール
+    sudo /opt/lampp/lampp stop //XAMPPの停止
+    sudo apt-get remove --purge xampp //aptコマンドでインストールした場合はこのコマンドでアンインストール
+        aptを使用していない場合はこの手順はスキップ
+    sudo rm -rf /opt/lampp //aptを使用していない場合は、このコマンドでlamppディレクトリを削除すればOK
+
+    sudo ./xampp〜.run //.runファイルを実行してインストール
 
 【VS Codeの拡張機能を一覧表示するコマンド】
 C:\Users\user>code --list-extensions
