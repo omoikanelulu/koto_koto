@@ -281,6 +281,22 @@ XAMPPのアンインストール
 
     sudo ./xampp〜.run //.runファイルを実行してインストール
 
+【npmのプロキシやらレジストリを設定する】
+viteがインストールされていないので色々試した覚書、sudoさんになる必要があったと思う
+    npm list vite //viteがインストールされているか出来る
+    npm install vite --save-dev //viteのインストールを行う
+
+プロキシやレジストリを確認変更する
+    npm config list //npmの設定を確認する
+    npm config ls -l //npmの設定全てを確認する
+
+    npm -g config set registry http://hogehoge/ //httpsの部分をhttpに変更したりした
+
+    npm -g config rm registry //設定の解除、多分どっちも一緒
+    npm -g config delete registry //設定の削除、多分どっちも一緒
+    ホームディレクトリに.npmrcファイルが作成されて、それで上書きするようなイメージっぽかった
+    .nomrcファイルは削除すると、デフォルト値が使用されるようになる、.bashrcと同じような感じだと思う
+
 【VS Codeの拡張機能を一覧表示するコマンド】
 C:\Users\user>code --list-extensions
 // 以下、実行内容
