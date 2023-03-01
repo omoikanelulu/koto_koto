@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Thing;
 use App\Http\Requests\UserUpdateRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -89,7 +90,10 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $this->checkId($user);
+        // ユーザの削除
         $user->delete();
+        // ユーザのthingも合わせて削除、withTrashed()で削除済みのthingも含めている
+        $user->things()->withTrashed()->delete();
 
         // $userが削除され、存在しなければリダイレクトさせる
         if ($user->exists()) {
