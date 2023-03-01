@@ -67,6 +67,7 @@ class User extends Authenticatable
      */
     public function thing()
     {
-        return $this->belongsTo(\App\Models\Thing::class);
+        // ひとつのユーザが複数のThingを持っている
+        return $this->hasMany(\App\Models\Thing::class);
     }
 }

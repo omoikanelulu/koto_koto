@@ -51,6 +51,7 @@ class Thing extends Model
      */
     public function user()
     {
-        return $this->hasMany(\App\Models\Thing::class);
+        // 複数あるThingはひとつのユーザを持っている（分かりにくい）
+        return $this->belongsTo(\App\Models\User::class);
     }
 }
