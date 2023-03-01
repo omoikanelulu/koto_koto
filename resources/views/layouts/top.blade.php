@@ -9,7 +9,7 @@
             <div class="card-body">
                 <h4 class="card-title">{{ config('app.name', 'Laravel') }}とは？</h4>
                 <p class="card-text ms-3">
-                    {{ App\consts\MessageConst::INTRODUCTION }}
+                    {!! App\consts\MessageConst::INTRODUCTION !!}
                 </p>
                 <h4 class="card-title">目的</h4>
                 <p class="card-text ms-3">
