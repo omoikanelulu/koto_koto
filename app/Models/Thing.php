@@ -49,7 +49,7 @@ class Thing extends Model
     /**
      * リレーション
      */
-    public function user()
+    public function users()
     {
         // 複数あるThingはひとつのユーザを持っている（分かりにくい）
         return $this->belongsTo(\App\Models\User::class);
