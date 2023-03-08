@@ -136,18 +136,27 @@ class ThingController extends Controller
         }
     }
 
-    //good_thing_orderとbad_thing_orderの値を比較してthing_flagに値を入れる処理
+    /**
+     * good_thing_orderとbad_thing_orderで評価したかどうか組み合わせによって0から3の値を持つ
+     * good_thing_order評価無し、bad_thing_order評価無し、値は0
+     * good_thing_order評価あり、bad_thing_order評価無し、値は1
+     * good_thing_order評価あり、bad_thing_order評価無し、値は2
+     * good_thing_order評価あり、bad_thing_order評価あり、値は3
+     */
     public function setThingFlag(ThingRequest $request)
     {
         $thing_flag = '';
 
+        // $good_thing_orderで評価していない場合
         if ($request->good_thing_order == 0) {
+            // $bad_thing_orderで評価していない場合
             if ($request->bad_thing_order == 0) {
                 $thing_flag = 0;
             } else {
                 $thing_flag = 2;
             }
         } else {
+            // $bad_thing_orderで評価していない場合
             if ($request->bad_thing_order == 0) {
                 $thing_flag = 1;
             } else {
