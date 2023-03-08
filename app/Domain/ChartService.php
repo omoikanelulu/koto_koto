@@ -26,17 +26,33 @@ class ChartService
     //     return $sum_good_ratings;
     // }
 
-    public function getRatings()
-{
-    // 合算した$good_thing_orderを取得
-    $sum_good_ratings = DB::table('things')
-        ->select('registration_date', DB::raw('sum(good_thing_order) as total_good_rating'))
-        // ->where(Auth::user()=)
-        ->groupBy('registration_date')
-        ->get();
-    return $sum_good_ratings;
-}
+    // public function getRatings()
+    // {
+    //     // ユーザIDの取得
+    //     $user_id = Auth::id();
+    //     // 合算した$good_thing_orderを取得
+    //     $sum_good_ratings = DB::table('things')
+    //         ->select('registration_date', DB::raw('sum(good_thing_order) as total_good_rating'))
+    //         ->where('user_id', $user_id)
+    //         ->groupBy('registration_date')
+    //         ->get();
+    //     return $sum_good_ratings;
+    // }
 
+    public function getRatings()
+    {
+        // ユーザIDの取得
+        $user_id = Auth::id();
+        // 合算した$good_thing_orderを取得
+        $sum_good_ratings = DB::table('things')
+            ->select(DB::raw('date(registration_date) as date')
+            , DB::raw('sum(good_thing_order) as total_good_rating'))
+            ->where('user_id', $user_id)
+            ->groupBy(DB::raw('date(registration_date)'))
+            ->get();
+
+        return $sum_good_ratings;
+    }
 }
 
 // データの取得
