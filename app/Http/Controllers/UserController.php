@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Domain\ChartService;
 use App\Models\User;
 use App\Models\Thing;
 use App\Http\Requests\UserUpdateRequest;
@@ -50,7 +51,11 @@ class UserController extends Controller
     public function show(User $user)
     {
         $this->checkId($user);
-        return view('user.show', compact('user'));
+
+        $chart_service = new ChartService();
+        $sum_good_ratings = $chart_service->getRatings();
+        dd($sum_good_ratings);
+        return view('user.show', compact('user', 'sum_good_ratings'));
     }
 
     /**
