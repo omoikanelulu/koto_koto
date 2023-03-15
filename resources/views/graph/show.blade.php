@@ -12,7 +12,7 @@
         <style>
             /* canvas要素の高さを調整 */
             #graph {
-                max-height: 80%;
+                max-height: 100%;
             }
         </style>
     </head>
@@ -56,7 +56,7 @@
                             beginAtZero: true,
                         },
                         x: {
-                            min: -30,
+                            min: -30, // この項目の-と+を逆にしたい
                             max: 30,
                             beginAtZero: true,
                             grid: {
