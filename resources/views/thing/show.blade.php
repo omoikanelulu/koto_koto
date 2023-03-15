@@ -71,4 +71,5 @@
             </table>
         </div>
     </div>
+    @include('monthlyLogs.monthlyLogs_graph')
 @endsection
