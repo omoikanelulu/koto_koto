@@ -52,9 +52,10 @@ class UserController extends Controller
     {
         $this->checkId($user);
 
+        // 必要なくなったかもしれない
         $chart_service = new ChartService();
         $sum_good_ratings = $chart_service->getRatings();
-        dd($sum_good_ratings);
+        /////
         return view('user.show', compact('user', 'sum_good_ratings'));
     }
 
