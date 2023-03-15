@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\GraphController;
 use App\Http\Controllers\ThingController;
 use App\Http\Controllers\UserController;
 
@@ -42,6 +43,10 @@ Route::get('/top', function () {
 Route::get('/thanks', function () {
     return view('thanks.thanks');
 });
+
+// グラフ化する期間を送信するindexと表示するshow
+Route::get('/graph', [GraphController::class, 'index'])->name('graph.index');
+Route::post('/graph/show', [GraphController::class, 'show'])->name('graph.show');
 
 // middleware('auth')をかけるグループ
 Route::middleware(['auth'])->group(function () {
