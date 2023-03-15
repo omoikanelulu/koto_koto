@@ -11,8 +11,14 @@ use Illuminate\Support\Facades\Auth;
 
 class Thing extends Model
 {
-    use HasFactory;
-    use SoftDeletes;
+    use HasFactory, SoftDeletes;
+
+    // Thingモデルにテーブル名とプライマリキーを設定する
+    protected $table = 'things';
+    protected $primaryKey = 'id';
+
+    // registration_dateをCarbonインスタンスとして扱う設定
+    protected $dates = ['registration_date'];
 
     protected $guarded = [
         'id',
