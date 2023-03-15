@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Thing;
 // use App\Models\User; // こうすると他のモデルも参照出来る
 use App\Http\Requests\ThingRequest;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
@@ -55,7 +56,7 @@ class ThingController extends Controller
         $thing = new Thing();
         $thing->fill($request->all());
         $thing->user_id = Auth::user()->id;
-        $thing->registration_date = date('Y-m-d H:i');
+        $thing->registration_date = date('Y-m-d H:i:s');
         //値がnullの場合、空文字にする
         $thing->bad_thing_workaround = $thing->bad_thing_workaround == null ? '' : $thing->bad_thing_workaround;
         $thing->thing_flag = $thing_flag;
@@ -75,7 +76,17 @@ class ThingController extends Controller
     {
         $this->checkUserId($thing);
         $user = Auth::user();
-        return view('thing.show', compact('thing', 'user'));
+
+        $date = $thing->registration_date->format('Y-m-d');
+
+        $graphData = [
+            $date => [
+                'good_thing_order' => $thing->good_thing_order,
+                'bad_thing_order' => $thing->bad_thing_order
+            ]
+        ];
+
+        return view('thing.show', compact('thing', 'user', 'graphData'));
     }
 
     /**
@@ -165,5 +176,35 @@ class ThingController extends Controller
         }
 
         return $thing_flag;
+    }
+
+    /**
+     * 毎日のorderを集計し、月毎に表示する為のデータを作成する
+     */
+    public function monthlyLogs($userId, $year, $month)
+    {
+        $startOfMonth = Carbon::create($year, $month, 1);
+        $endOfMonth = $startOfMonth->copy()->endOfMonth();
+
+        $things = Thing::where('user_id', $userId)
+            ->whereBetween('registration_date', [$startOfMonth, $endOfMonth])
+            ->get();
+
+        $graphData = [];
+
+        foreach ($things as $thing) {
+            $date = $thing->registration_date->format('Y-m-d');
+            if (!isset($graphData[$date])) {
+                $graphData[$date] = [
+                    'good_thing_order' => 0,
+                    'bad_thing_order' => 0
+                ];
+            }
+            $graphData[$date]['good_thing_order'] += $thing->good_thing_order;
+            $graphData[$date]['bad_thing_order'] += $thing->bad_thing_order;
+        }
+
+
+        return view('monthlyLogs.monthlyLogs_graph', compact('graphData'));
     }
 }
