@@ -77,6 +77,12 @@
                                         </a>
                                     @endif
 
+                                    @if (isset($user))
+                                        <a class="dropdown-item" href="{{ route('graph.index', $user) }}">
+                                            グラフで見る
+                                        </a>
+                                    @endif
+
                                     {{-- ログアウトボタン --}}
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
