@@ -9,11 +9,11 @@
     <style>
         /* canvas要素の高さを調整 */
         #monthlyLogsChart {
-            max-height: 40%;
+            max-height: 30%;
         }
     </style>
 </head>
-    
+
 <body>
     <canvas id="monthlyLogsChart"></canvas>
     <script>
