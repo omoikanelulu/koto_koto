@@ -5,21 +5,22 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Thing;
-use App\Models\User;
 use Carbon\Carbon;
 
 class GraphController extends Controller
 {
-    public function index(User $user)
+    public function index()
     {
-        // // ユーザ情報をもっていかないとログアウト以外のメニューが出ない
-        // $user = User::user();
-        // return view('graph.index', compact('user'));
-        return view('graph.index');
+        // ユーザ情報をもっていかないとログアウト以外のメニューが出ない
+        $user = Auth::user();
+        return view('graph.index', compact('user'));
     }
 
     public function show(Request $request)
     {
+        // ユーザ情報をもっていかないとログアウト以外のメニューが出ない
+        $user = Auth::user();
+
         $userId = auth()->id();
         $startDate = Carbon::parse($request->start_date);
         $endDate = Carbon::parse($request->end_date);
@@ -42,6 +43,6 @@ class GraphController extends Controller
             $graphData[$date]['bad_thing_order'] += $thing->bad_thing_order;
         }
 
-        return view('graph.show', compact('graphData'));
+        return view('graph.show', compact('user', 'graphData'));
     }
 }
