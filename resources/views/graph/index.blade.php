@@ -10,7 +10,7 @@
         </div>
         <div class="input-group mb-3">
             <label class="input-group-text" for="end_date">終了日:</label>
-            <input class="form-control" type="date" name="end_date" id="end_date" required>
+            <input class="form-control" type="date" name="end_date" id="end_date" value="{{ $today }}" required>
         </div>
         <button class="btn btn-sm btn-primary" type="submit">グラフ化する</button>
     </form>
