@@ -9,15 +9,15 @@
             <div class="card-body">
                 <h4 class="card-title">{{ config('app.name', 'Laravel') }}とは？</h4>
                 <p class="card-text ms-3">
-                    {!! App\consts\MessageConst::INTRODUCTION !!}
+                    {!! App\consts\AppMessagesConst::INTRODUCTION !!}
                 </p>
                 <h4 class="card-title">目的</h4>
                 <p class="card-text ms-3">
-                    {!! App\consts\MessageConst::PURPOSE !!}
+                    {!! App\consts\AppMessagesConst::PURPOSE !!}
                 </p>
                 <h4 class="card-title">使い方</h4>
                 <ol class="card-text">
-                    {!! App\consts\MessageConst::USAGE !!}
+                    {!! App\consts\AppMessagesConst::USAGE !!}
                 </ol>
                 <a class="btn btn-primary" href="{{ route('login') }}">{{ __('Login') }}</a>
                 <a class="btn btn-outline-info" href="{{ route('register') }}">{{ __('Register') }}</a>
