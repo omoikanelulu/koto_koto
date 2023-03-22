@@ -20,7 +20,11 @@ Auth::routes();
 
 // Route::get('/', [ThingController::class, 'index'])->name('/');
 Route::get('/', function () {
-    return redirect('/top');
+    if (Auth::check()) {
+        return redirect('/thing');
+    } else {
+        return redirect('/top');
+    }
 });
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -35,7 +39,11 @@ Route::get('/info', function () {
 
 // トップページ
 Route::get('/top', function () {
-    return view('layouts.top');
+    if (Auth::check()) {
+        return redirect('/thing');
+    } else {
+        return view('layouts.top');
+    }
 });
 
 // ユーザを削除してサンクスページを出す試み
