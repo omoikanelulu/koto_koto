@@ -18,33 +18,30 @@ use App\Http\Controllers\UserController;
 
 Auth::routes();
 
-// Route::get('/', [ThingController::class, 'index'])->name('/');
 Route::get('/', function () {
-    if (Auth::check()) {
-        return redirect('/thing');
-    } else {
-        return redirect('/top');
-    }
+    return Auth::check() ? view('thing.index') : view('layouts.top');
 });
 
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-// Route::get('/home', function () {
-//     return redirect('/top');
+// Route::get('/', function () {
+//     if (Auth::check()) {
+//         return redirect('/thing');
+//     } else {
+//         return redirect('/top');
+//     }
 // });
 
-// phpinfo()を表示する
-Route::get('/info', function () {
-    return phpinfo();
-});
+// Route::get('/top', function () {
+//     return Auth::check() ? redirect('/thing') : view('auth.login');
+// });
 
 // トップページ
-Route::get('/top', function () {
-    if (Auth::check()) {
-        return redirect('/thing');
-    } else {
-        return view('layouts.top');
-    }
-});
+// Route::get('/top', function () {
+//     if (Auth::check()) {
+//         return redirect('/thing');
+//     } else {
+//         return view('layouts.top');
+//     }
+// });
 
 // ユーザを削除してサンクスページを出す試み
 // アクションを指定する時は[]で囲む必要があるっぽい 【例】[コントローラ名::class, アクション名]
@@ -52,7 +49,12 @@ Route::get('/thanks', function () {
     return view('thanks.thanks');
 });
 
-// グラフ化する期間を送信するindexと表示するshow
+// phpinfo()を表示する
+Route::get('/info', function () {
+    return phpinfo();
+});
+
+// グラフ化する期間を送信するindexページと表示するshowページ
 Route::get('/graph', [GraphController::class, 'index'])->name('graph.index');
 Route::post('/graph/show', [GraphController::class, 'show'])->name('graph.show');
 
