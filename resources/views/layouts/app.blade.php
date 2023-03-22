@@ -16,6 +16,44 @@
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+
+    <style>
+        /* ボタンの初期設定 */
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            display: none;
+            font-size: 2rem;
+            color: white;
+            background-color: #007bff;
+            border-radius: 50%;
+            width: 3rem;
+            height: 3rem;
+            line-height: 2.8rem;
+            text-align: center;
+            cursor: pointer;
+            transition: opacity 0.3s ease-in-out;
+            z-index: 9999;
+        }
+
+        /* ボタンが表示される場合 */
+        .back-to-top.show {
+            display: block;
+            opacity: 0.6;
+        }
+
+        /* スマホサイズ以下の場合のボタンの位置調整 */
+        @media screen and (max-width: 576px) {
+            .back-to-top {
+                bottom: 1rem;
+                right: 1rem;
+            }
+        }
+    </style>
+
+    <!-- headセクション内でjQueryを読み込む -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 
 <body>
@@ -107,6 +145,40 @@
             </div>
         </main>
     </div>
+    <!-- 画面のトップに戻るボタン -->
+    <button id="back-to-top" class="btn btn-primary btn-sm back-to-top" type="button" aria-label="トップへ戻る">
+        <span class="fa fa-chevron-up">↑</span>
+    </button>
+
+    {{-- トップページに戻るボタンの処理 --}}
+    <script type="text/javascript">
+        $(function() {
+            // スクロールした際の動きを関数でまとめる
+            function backToTop() {
+                // スクロール量を取得
+                var scroll = $(window).scrollTop();
+                if (scroll >= 400) {
+                    // 400px以上スクロールされた場合にボタンを表示
+                    $('#back-to-top').addClass('show');
+                } else {
+                    // 400px未満の場合にボタンを非表示
+                    $('#back-to-top').removeClass('show');
+                }
+            }
+            // ページ読み込み時とスクロール時に実行
+            $(window).on('load scroll', function() {
+                backToTop();
+            });
+            // ボタンクリックでトップに戻る
+            $('#back-to-top').click(function() {
+                $('body,html').animate({
+                    scrollTop: 0
+                }, 800);
+                return false;
+            });
+        });
+    </script>
+
 </body>
 
 </html>
