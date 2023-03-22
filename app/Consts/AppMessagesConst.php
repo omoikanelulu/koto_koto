@@ -2,7 +2,7 @@
 
 namespace App\Consts;
 
-class MessageConst
+class AppMessagesConst
 {
     const INTRODUCTION = '自己肯定感を向上させる方法のひとつに「寝る前にその日にあったいいことを3つ書き出す」という方法があります。<br>
     この方法は、アメリカの心理学者であるマーティン・セリグマン氏が唱えているもので、「スリー・グッド・シングス」と呼ばれているそうです。<br>
