@@ -6,8 +6,8 @@
     <style>
         /* canvas要素の高さを調整 */
         #today_chart {
-            max-height: 100%;
-            max-width: 100%;
+            height: 400px;
+            width: 400px;
         }
     </style>
 </head>
@@ -16,54 +16,31 @@
     <canvas id="today_chart"></canvas>
     <script>
         const graphData = @json($graphData);
-        const labels = Object.keys(graphData);
-        const goodThingOrders = labels.map(date => graphData[date].good_thing_order);
-        const badThingOrders = labels.map(date => -graphData[date].bad_thing_order);
+        const labels = ['Good Thing Order', 'Bad Thing Order'];
+        const goodThingOrders = graphData.reduce((total, currentValue) => total + currentValue.good_thing_order, 0);
+        const badThingOrders = graphData.reduce((total, currentValue) => total + currentValue.bad_thing_order, 0);
 
         const ctx = document.getElementById('today_chart').getContext('2d');
         const chart = new Chart(ctx, {
-            type: 'bar',
+            type: 'pie',
             data: {
                 labels: labels,
                 datasets: [{
-                        label: 'Good Thing Order',
-                        data: goodThingOrders,
-                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                        borderColor: 'rgba(75, 192, 192, 1)',
-                        borderWidth: 1,
-                        stack: 'stack1', // データセットのスタック名を設定
-                    },
-                    {
-                        label: 'Bad Thing Order',
-                        data: badThingOrders,
-                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                        borderColor: 'rgba(255, 99, 132, 1)',
-                        borderWidth: 1,
-                        stack: 'stack1', // データセットのスタック名を設定
-                    },
-                ],
+                    data: [goodThingOrders, badThingOrders],
+                    backgroundColor: [
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(255, 99, 132, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(255, 99, 132, 1)'
+                    ],
+                    borderWidth: 1
+                }]
             },
             options: {
-                indexAxis: 'y',
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                    },
-                    x: {
-                        min: -3, // x軸の最小値を-3に設定
-                        max: 3, // x軸の最大値を3に設定
-                        beginAtZero: true,
-                        grid: {
-                            drawOnChartArea: false,
-                            drawTicks: false,
-                            drawBorder: false,
-                            borderColor: 'rgba(0, 0, 0, 0.1)',
-                            borderWidth: 1,
-                            zeroLineColor: 'rgba(0, 0, 0, 0.1)',
-                            zeroLineWidth: 1,
-                        },
-                    },
-                },
+                responsive: true,
+                maintainAspectRatio: false,
             },
         });
     </script>
