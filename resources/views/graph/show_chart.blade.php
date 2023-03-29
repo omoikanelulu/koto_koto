@@ -1,32 +1,28 @@
 @extends('layouts.app')
 
 @section('content')
-    <!DOCTYPE html>
-    <html lang="ja">
 
     <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>指定期間のグラフ</title>
+        {{-- チャートを作成するchart.jsを読み込む --}}
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <style>
             /* canvas要素の高さを調整 */
-            #graph {
+            #user_chart {
                 max-height: 100%;
+                max-width: 100%;
             }
         </style>
     </head>
 
     <body>
         <h1>指定期間のグラフ</h1>
-        <canvas id="graph"></canvas>
+        <canvas id="user_chart"></canvas>
         <script>
             const graphData = @json($graphData);
             const labels = Object.keys(graphData);
             const goodThingOrders = labels.map(date => graphData[date].good_thing_order);
             const badThingOrders = labels.map(date => -graphData[date].bad_thing_order);
-
-            const ctx = document.getElementById('graph').getContext('2d');
+            const ctx = document.getElementById('user_chart').getContext('2d');
             const chart = new Chart(ctx, {
                 type: 'bar',
                 data: {
@@ -56,7 +52,7 @@
                             beginAtZero: true,
                         },
                         x: {
-                            min: -30, // この項目の-と+を逆にしたい
+                            min: -30,
                             max: 30,
                             beginAtZero: true,
                             grid: {

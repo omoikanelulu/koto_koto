@@ -24,11 +24,11 @@
                 <table class="table">
                     <tr>
                         @empty(!$thing->good_thing_order)
-                            @if ($thing->good_thing_order == 1)
+                            @if ($thing->good_thing_order == 3)
                                 <td class="border-0">すごくイイ</td>
                             @elseif ($thing->good_thing_order == 2)
                                 <td class="border-0">イイ</td>
-                            @elseif($thing->good_thing_order == 3)
+                            @elseif($thing->good_thing_order == 1)
                                 <td class="border-0">ちょっとイイ</td>
                             @else
                                 <td class="border-0">{{ '' }}</td>
@@ -36,11 +36,11 @@
                         @endempty
 
                         @empty(!$thing->bad_thing_order)
-                            @if ($thing->bad_thing_order == 1)
+                            @if ($thing->bad_thing_order == 3)
                                 <td class="border-0">すごくイヤ</td>
                             @elseif ($thing->bad_thing_order == 2)
                                 <td class="border-0">イヤ</td>
-                            @elseif($thing->bad_thing_order == 3)
+                            @elseif($thing->bad_thing_order == 1)
                                 <td class="border-0">ちょっとイヤ</td>
                             @else
                                 <td class="border-0">{{ '' }}</td>
@@ -71,5 +71,5 @@
             </table>
         </div>
     </div>
-    @include('monthlyLogs.monthlyLogs_graph')
+    @include('graph.today_chart')
 @endsection

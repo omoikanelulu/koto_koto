@@ -51,6 +51,6 @@ class GraphController extends Controller
             $graphData[$date]['bad_thing_order'] += $thing->bad_thing_order;
         }
 
-        return view('graph.show', compact('user', 'graphData'));
+        return view('graph.show_chart', compact('user', 'graphData'));
     }
 }

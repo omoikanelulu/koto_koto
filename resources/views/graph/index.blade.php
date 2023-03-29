@@ -2,7 +2,7 @@
 
 @section('content')
     <h1>期間を指定してグラフを表示</h1>
-    <form action="{{ route('graph.show') }}" method="post">
+    <form action="{{ route('graph.show_chart') }}" method="post">
         @csrf
         <div class="input-group mb-3">
             <label class="input-group-text" for="start_date">開始日:</label>

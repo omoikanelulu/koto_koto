@@ -8,21 +8,22 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         /* canvas要素の高さを調整 */
-        #monthlyLogsChart {
-            max-height: 30%;
+        #today_chart {
+            max-height: 100%;
+            max-width: 100%;
         }
     </style>
 </head>
 
 <body>
-    <canvas id="monthlyLogsChart"></canvas>
+    <canvas id="today_chart"></canvas>
     <script>
         const graphData = @json($graphData);
         const labels = Object.keys(graphData);
         const goodThingOrders = labels.map(date => graphData[date].good_thing_order);
         const badThingOrders = labels.map(date => -graphData[date].bad_thing_order);
 
-        const ctx = document.getElementById('monthlyLogsChart').getContext('2d');
+        const ctx = document.getElementById('today_chart').getContext('2d');
         const chart = new Chart(ctx, {
             type: 'bar',
             data: {
