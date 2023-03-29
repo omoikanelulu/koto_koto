@@ -19,7 +19,7 @@ use App\Http\Controllers\UserController;
 Auth::routes();
 
 Route::get('/', function () {
-    return Auth::check() ? view('thing.index') : view('layouts.top');
+    return Auth::check() ? redirect('/thing') : view('top.top');
 });
 
 // Route::get('/', function () {
@@ -30,18 +30,11 @@ Route::get('/', function () {
 //     }
 // });
 
-// Route::get('/top', function () {
-//     return Auth::check() ? redirect('/thing') : view('auth.login');
-// });
-
 // トップページ
-// Route::get('/top', function () {
-//     if (Auth::check()) {
-//         return redirect('/thing');
-//     } else {
-//         return view('layouts.top');
-//     }
-// });
+Route::get('/top', function () {
+    // ログイン状態であるかチェックsi,7trueかfalseで処理を分岐させる
+    return Auth::check() ? redirect('/thing') : view('top.top');
+});
 
 // ユーザを削除してサンクスページを出す試み
 // アクションを指定する時は[]で囲む必要があるっぽい 【例】[コントローラ名::class, アクション名]
@@ -56,7 +49,7 @@ Route::get('/info', function () {
 
 // グラフ化する期間を送信するindexページと表示するshowページ
 Route::get('/graph', [GraphController::class, 'index'])->name('graph.index');
-Route::post('/graph/show', [GraphController::class, 'show'])->name('graph.show');
+Route::post('/graph/show_chart', [GraphController::class, 'show'])->name('graph.show_chart');
 
 // middleware('auth')をかけるグループ
 Route::middleware(['auth'])->group(function () {
