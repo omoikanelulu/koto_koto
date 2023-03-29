@@ -60,6 +60,7 @@
     <div id="app">
         <nav class="sticky-sm-top navbar navbar-expand-lg navbar-light bg-white shadow-sm">
             <div class="container">
+                {{-- 三項演算子で書けそう --}}
                 @if (auth()->check())
                     <a class="navbar-brand" href="{{ url('/thing') }}">
                         {{ config('app.name', 'Laravel') }}
@@ -116,7 +117,7 @@
                                     @endif
 
                                     @if (isset($user))
-                                        <a class="dropdown-item" href="{{ route('graph.index', $user) }}">
+                                        <a class="dropdown-item" href="{{ route('graph.index_chart', $user) }}">
                                             グラフで見る
                                         </a>
                                     @endif

@@ -48,7 +48,7 @@ Route::get('/info', function () {
 });
 
 // グラフ化する期間を送信するindexページと表示するshowページ
-Route::get('/graph', [GraphController::class, 'index'])->name('graph.index');
+Route::get('/graph', [GraphController::class, 'index'])->name('graph.index_chart');
 Route::post('/graph/show_chart', [GraphController::class, 'show'])->name('graph.show_chart');
 
 // middleware('auth')をかけるグループ
