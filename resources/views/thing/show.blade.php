@@ -12,6 +12,8 @@
                 <tr>
                     <td class="thing">{!! nl2br(e($thing->thing), false) !!}</td>
                 </tr>
+
+                {{-- bad_thing_workaroundが、存在する時の処理 --}}
                 @empty(!$thing->bad_thing_workaround)
                     <tr class="d-flex justify-content-end">
                         <td class="bad-thing-workaround p-3 rounded-3">
@@ -19,6 +21,8 @@
                     </tr>
                 @endempty
             </table>
+
+            {{-- thing_flagが、存在する時の処理 --}}
             @empty(!$thing->thing_flag)
                 <h5 class="border-bottom pb-1">当時のキモチ</h5>
                 <table class="table">
@@ -49,7 +53,10 @@
                     </tr>
                 </table>
             @endempty
-            <table class="d-md-flex justify-content-end">
+
+            @include('graph.today_chart')
+            {{-- 操作ボタン --}}
+            <table class="d-flex justify-content-end">
                 <tr>
                     <td>
                         <div class="operation-buttons py-3">
@@ -69,7 +76,7 @@
                     </td>
                 </tr>
             </table>
+
         </div>
     </div>
-    @include('graph.today_chart')
 @endsection
