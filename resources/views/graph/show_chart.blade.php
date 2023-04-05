@@ -14,6 +14,8 @@
         </style>
     </head>
 
+    {{-- グラフの棒の幅を固定したいが、手間がかかるようなので放置している --}}
+
     <body>
         <h1>指定期間のグラフ</h1>
         <canvas id="user_chart"></canvas>
@@ -46,6 +48,7 @@
                     ],
                 },
                 options: {
+                    responsive: true,
                     indexAxis: 'y',
                     scales: {
                         y: {
@@ -70,6 +73,4 @@
             });
         </script>
     </body>
-
-    </html>
 @endsection
