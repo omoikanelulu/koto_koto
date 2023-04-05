@@ -18,7 +18,7 @@ class GraphController extends Controller
         $today = AppDatesConst::today();
         // ユーザ情報をもっていかないとログアウト以外のメニューが出ない
         $user = Auth::user();
-        return view('graph.index_chart', compact('user', 'today'));
+        return view('graph.index_chart', compact('today', 'user'));
     }
 
     /**
