@@ -1,25 +1,30 @@
-<!DOCTYPE html>
-<html lang="ja">
-
 <head>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         /* canvas要素の高さを調整 */
+        #today_chart_container {
+            max-height: 200px;
+            max-width: 200px;
+        }
+
         #today_chart {
-            height: 400px;
-            width: 400px;
+            display: block;
         }
     </style>
 </head>
 
 <body>
-    <canvas id="today_chart"></canvas>
+    <div class="d-flex justify-content-center">
+        <div id="today_chart_container">
+            <canvas id="today_chart"></canvas>
+        </div>
+    </div>
     <script>
         const graphData = @json($graphData);
+        const graphDataArray = Object.values(graphData).map(value => value);
         const labels = ['Good Thing Order', 'Bad Thing Order'];
-        const goodThingOrders = graphData.reduce((total, currentValue) => total + currentValue.good_thing_order, 0);
-        const badThingOrders = graphData.reduce((total, currentValue) => total + currentValue.bad_thing_order, 0);
-
+        const goodThingOrders = graphDataArray.reduce((total, currentValue) => total + currentValue.good_thing_order, 0);
+        const badThingOrders = graphDataArray.reduce((total, currentValue) => total + currentValue.bad_thing_order, 0);
         const ctx = document.getElementById('today_chart').getContext('2d');
         const chart = new Chart(ctx, {
             type: 'pie',
