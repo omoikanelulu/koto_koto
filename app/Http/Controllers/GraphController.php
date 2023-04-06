@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Consts\AppDatesConst;
+use App\Consts\AppMessagesConst;
 use App\Models\Thing;
 use Carbon\Carbon;
 
@@ -15,10 +16,13 @@ class GraphController extends Controller
      */
     public function index()
     {
+        // 当日の日付を格納
         $today = AppDatesConst::today();
-        // ユーザ情報をもっていかないとログアウト以外のメニューが出ない
+        // ユーザ情報を渡さないとログアウト以外のメニューが出ない
         $user = Auth::user();
-        return view('graph.index_chart', compact('today', 'user'));
+        // 定数を格納
+        $const = AppMessagesConst::INDEX_CHART;
+        return view('graph.index_chart', compact('today', 'user', 'const'));
     }
 
     /**
