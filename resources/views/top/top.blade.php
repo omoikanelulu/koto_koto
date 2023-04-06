@@ -11,14 +11,17 @@
                 <p class="card-text ms-3">
                     {!! App\consts\AppMessagesConst::INTRODUCTION !!}
                 </p>
-                <h4 class="card-title">目的</h4>
+                <p class="card-text ms-3">
+                    {!! App\consts\AppMessagesConst::GLOSSARY !!}
+                </p>
+                {{-- <h4 class="card-title">目的</h4>
                 <p class="card-text ms-3">
                     {!! App\consts\AppMessagesConst::PURPOSE !!}
                 </p>
                 <h4 class="card-title">使い方</h4>
                 <ol class="card-text">
                     {!! App\consts\AppMessagesConst::USAGE !!}
-                </ol>
+                </ol> --}}
                 <a class="btn btn-primary" href="{{ route('login') }}">{{ __('Login') }}</a>
                 <a class="btn btn-outline-info" href="{{ route('register') }}">{{ __('Register') }}</a>
             </div>
