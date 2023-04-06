@@ -18,6 +18,8 @@
 
     <body>
         <h1>指定期間のグラフ</h1>
+
+        {{-- グラフの描画 --}}
         <canvas id="user_chart"></canvas>
         <script>
             const graphData = @json($graphData);
@@ -72,5 +74,12 @@
                 },
             });
         </script>
+                {{-- 戻るボタン --}}
+                <div class="">
+                    <a href="{{ route('thing.index') }}">
+                        <button type="button" class="btn btn-sm btn-secondary">戻る</button>
+                    </a>
+                </div>
+
     </body>
 @endsection
