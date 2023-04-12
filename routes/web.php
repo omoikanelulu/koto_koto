@@ -67,7 +67,7 @@ Auth::routes();
 
 // トップページ
 Route::get('/', function () {
-    // ログイン状態であるかチェックsi,7trueかfalseで処理を分岐させる
+    // ログイン状態であるかチェックしtrueかfalseで処理を分岐させる
     return Auth::check() ? redirect('/thing') : view('top.top');
 })->name('top');
 
