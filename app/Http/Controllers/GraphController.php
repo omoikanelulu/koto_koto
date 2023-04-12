@@ -30,6 +30,8 @@ class GraphController extends Controller
      */
     public function show(Request $request)
     {
+        $const = AppMessagesConst::SHOW_CHART;
+
         // ユーザ情報をもっていかないとログアウト以外のメニューが出ない
         $user = Auth::user();
         $userId = auth()->id();
@@ -55,6 +57,6 @@ class GraphController extends Controller
             $graphData[$date]['bad_thing_order'] += $thing->bad_thing_order;
         }
 
-        return view('graph.show_chart', compact('user', 'graphData'));
+        return view('graph.show_chart', compact('user', 'graphData', 'const'));
     }
 }

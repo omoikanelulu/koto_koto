@@ -17,7 +17,7 @@
     {{-- グラフの棒の幅を固定したいが、手間がかかるようなので未着手 --}}
 
     <body>
-        <h1>指定期間のグラフ</h1>
+        <h1>{!! $const['title'] !!}</h1>
 
         {{-- グラフの描画 --}}
         <canvas id="user_chart"></canvas>
@@ -77,7 +77,7 @@
         {{-- 戻るボタン --}}
         <div class="">
             <a href="{{ route('graph.index_chart') }}">
-                <button type="button" class="btn btn-sm btn-secondary">戻る</button>
+                <button type="button" class="btn btn-sm btn-secondary">{!! $const['back'] !!}</button>
             </a>
         </div>
 

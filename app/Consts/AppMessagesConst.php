@@ -26,4 +26,9 @@ class AppMessagesConst
         'submit' => 'グラフ化する',
         'back' => '戻る',
     ];
+
+    const SHOW_CHART = [
+        'title' => '指定期間をグラフ表示',
+        'back' => '戻る',
+    ];
 }
