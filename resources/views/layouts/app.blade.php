@@ -58,15 +58,17 @@
 
 <body>
     <div id="app">
+        {{-- ナビゲーションバー --}}
         <nav class="sticky-sm-top navbar navbar-expand-lg navbar-light bg-white shadow-sm">
             <div class="container">
-                {{-- 三項演算子で書けそう --}}
                 @if (auth()->check())
-                    <a class="navbar-brand" href="{{ url('/thing') }}">
+                    {{-- ユーザがログイン中の処理 --}}
+                    <a class="navbar-brand" href="{{ route('thing.index') }}">
                         {{ config('app.name', 'Laravel') }}
                     </a>
                 @else
-                    <a class="navbar-brand" href="{{ url('/top') }}">
+                    {{-- ユーザがログインしていない時の処理 --}}
+                    <a class="navbar-brand" href="{{ route('top') }}">
                         {{ config('app.name', 'Laravel') }}
                     </a>
                 @endif
