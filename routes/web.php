@@ -22,14 +22,6 @@ Route::get('/', function () {
     return Auth::check() ? redirect('/thing') : view('top.top');
 });
 
-// Route::get('/', function () {
-//     if (Auth::check()) {
-//         return redirect('/thing');
-//     } else {
-//         return redirect('/top');
-//     }
-// });
-
 // トップページ
 Route::get('/top', function () {
     // ログイン状態であるかチェックsi,7trueかfalseで処理を分岐させる
