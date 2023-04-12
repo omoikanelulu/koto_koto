@@ -11,6 +11,19 @@ class ThingPolicy
     use HandlesAuthorization;
 
     /**
+     * Determine whether the user can access the model.
+     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Thing  $thing
+     * @return \Illuminate\Auth\Access\Response|bool
+     */
+    public function accessCheck(User $user, Thing $thing)
+    {
+        $result = ((int)$user->id === (int)$thing->user_id);
+        return $result;
+    }
+
+    /**
      * Determine whether the user can view any models.
      *
      * @param  \App\Models\User  $user
@@ -41,7 +54,7 @@ class ThingPolicy
      */
     public function create(User $user)
     {
-        //
+        return true;
     }
 
     /**
