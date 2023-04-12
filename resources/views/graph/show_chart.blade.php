@@ -14,7 +14,7 @@
         </style>
     </head>
 
-    {{-- グラフの棒の幅を固定したいが、手間がかかるようなので放置している --}}
+    {{-- グラフの棒の幅を固定したいが、手間がかかるようなので未着手 --}}
 
     <body>
         <h1>指定期間のグラフ</h1>
@@ -74,12 +74,12 @@
                 },
             });
         </script>
-                {{-- 戻るボタン --}}
-                <div class="">
-                    <a href="{{ route('thing.index') }}">
-                        <button type="button" class="btn btn-sm btn-secondary">戻る</button>
-                    </a>
-                </div>
+        {{-- 戻るボタン --}}
+        <div class="">
+            <a href="{{ route('graph.index_chart') }}">
+                <button type="button" class="btn btn-sm btn-secondary">戻る</button>
+            </a>
+        </div>
 
     </body>
 @endsection
