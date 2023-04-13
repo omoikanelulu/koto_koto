@@ -52,9 +52,11 @@
                         @endempty
                     </tr>
                 </table>
+
+                {{-- 当日のグラフを表示する --}}
+                @include('graph.today_chart')
             @endempty
 
-            @include('graph.today_chart')
             {{-- 操作ボタン --}}
             <table class="d-flex justify-content-end">
                 <tr>
