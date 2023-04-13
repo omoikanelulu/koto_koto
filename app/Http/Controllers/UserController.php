@@ -50,13 +50,9 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        $this->checkId($user);
+        $this->authorize('confirmUserPermission', $user);
 
-        // 必要なくなったかもしれない
-        $chart_service = new ChartService();
-        $sum_good_ratings = $chart_service->getRatings();
-        /////
-        return view('user.show', compact('user', 'sum_good_ratings'));
+        return view('user.show', compact('user'));
     }
 
     /**
@@ -67,7 +63,8 @@ class UserController extends Controller
      */
     public function edit(User $user, Request $request)
     {
-        $this->checkId($user);
+        $this->authorize('confirmUserPermission', $user);
+
         return view('user.edit', compact('user'));
     }
 
@@ -80,10 +77,11 @@ class UserController extends Controller
      */
     public function update(UserUpdateRequest $request, User $user)
     {
-        $this->checkId($user);
+        $this->authorize('confirmUserPermission', $user);
 
         $user->fill($request->all());
         $user->save();
+
         return redirect('thing');
     }
 
@@ -95,7 +93,8 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        $this->checkId($user);
+        $this->authorize('confirmUserPermission', $user);
+
         // ユーザの削除
         $user->delete();
         // ユーザのthingも合わせて削除、withTrashed()で削除済みのthingも含めている
@@ -106,13 +105,6 @@ class UserController extends Controller
             return redirect('/thanks');
         } else {
             abort('', '処理に失敗しました');
-        }
-    }
-
-    public function checkId(User $user, int $status = 403)
-    {
-        if (Auth::user()->id != $user->id) {
-            abort($status, 'IDが一致しません');
         }
     }
 }
