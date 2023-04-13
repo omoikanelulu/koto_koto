@@ -176,7 +176,7 @@
             $('#back-to-top').click(function() {
                 $('body,html').animate({
                     scrollTop: 0
-                }, 800);
+                }, 200);
                 return false;
             });
         });
