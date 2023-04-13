@@ -2,20 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Thing;
-// use App\Models\User; // こうすると他のモデルも参照出来る
 use App\Http\Requests\ThingRequest;
+use App\Models\Thing;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class ThingController extends Controller
 {
-    public function __construct()
-    {
-        // トップページもログインしていないと表示されなくなってしまう…認証の必要が無いところに置かないとダメか？
-        // $this->middleware('auth');
-    }
     /**
      * Display a listing of the resource.
      *
@@ -38,6 +32,7 @@ class ThingController extends Controller
     public function create()
     {
         $user = Auth::user();
+
         return view('thing.create', compact('user'));
     }
 
@@ -49,6 +44,7 @@ class ThingController extends Controller
      */
     public function store(ThingRequest $request)
     {
+        // $is_deletedは不要だが、テーブルからカラムを削除する必要がある。手間がかかるので保留
         $is_deleted = 0;
 
         $thing_flag = $this->setThingFlag($request);
@@ -60,6 +56,7 @@ class ThingController extends Controller
         //値がnullの場合、空文字にする
         $thing->bad_thing_workaround = $thing->bad_thing_workaround == null ? '' : $thing->bad_thing_workaround;
         $thing->thing_flag = $thing_flag;
+        // $is_deletedは不要だが、テーブルからカラムを削除する必要がある。手間がかかるので保留
         $thing->is_deleted = $is_deleted;
         $thing->save();
 
@@ -74,11 +71,11 @@ class ThingController extends Controller
      */
     public function show(Thing $thing)
     {
-        $this->checkUserId($thing);
+        // ポリシーでアクセスできるユーザであるかチェックする
+        $this->authorize('confirmThingPermission', $thing);
+
         $user = Auth::user();
-
         $date = $thing->registration_date->format('Y-m-d');
-
         $graphData = [
             $date => [
                 'good_thing_order' => $thing->good_thing_order,
@@ -97,8 +94,10 @@ class ThingController extends Controller
      */
     public function edit(Thing $thing)
     {
-        $this->checkUserId($thing);
+        $this->authorize('confirmThingPermission', $thing);
+
         $user = Auth::user();
+
         return view('thing.edit', compact('thing', 'user'));
     }
 
@@ -111,7 +110,11 @@ class ThingController extends Controller
      */
     public function update(ThingRequest $request, Thing $thing)
     {
-        $this->checkUserId($thing);
+        // $this->checkUserId($thing);
+
+        // ポリシーでアクセスできるユーザであるかチェックする
+        $this->authorize('confirmThingPermission', $thing);
+
         $thing_flag = $this->setThingFlag($request);
 
         $thing->fill($request->all());
@@ -119,6 +122,7 @@ class ThingController extends Controller
         $thing->bad_thing_workaround = $thing->bad_thing_workaround == null ? '' : $thing->bad_thing_workaround;
         $thing->thing_flag = $thing_flag;
         $thing->save();
+
         return redirect(route('thing.show', $thing));
     }
 
@@ -130,22 +134,17 @@ class ThingController extends Controller
      */
     public function destroy(Thing $thing)
     {
-        $this->checkUserId($thing);
+        // $this->checkUserId($thing);
+
+        // ポリシーでアクセスできるユーザであるかチェックする
+        $this->authorize('confirmThingPermission', $thing);
+
         // $thing->delete(); //ソフトデリート
         $thing->forceDelete(); //ハードデリート
+
         return redirect(route('thing.index'))->with('message', '削除しました');
     }
 
-    /**
-     * ログインしているユーザのIDとデキゴトのuser_idを比較する
-     * 不一致ならabort
-     */
-    public function checkUserId(Thing $thing, int $status = 403)
-    {
-        if (Auth::user()->id != $thing->user_id) {
-            abort($status, '別ユーザのデキゴトは閲覧出来ません');
-        }
-    }
 
     /**
      * good_thing_orderとbad_thing_orderで評価したかどうか組み合わせによって0から3の値を持つ
@@ -203,7 +202,6 @@ class ThingController extends Controller
             $graphData[$date]['good_thing_order'] += $thing->good_thing_order;
             $graphData[$date]['bad_thing_order'] += $thing->bad_thing_order;
         }
-
 
         return view('monthlyLogs.monthlyLogs_graph', compact('graphData'));
     }
