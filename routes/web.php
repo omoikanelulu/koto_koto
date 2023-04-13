@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GraphController;
+use App\Http\Controllers\ThanksController;
 use App\Http\Controllers\ThingController;
 use App\Http\Controllers\UserController;
 
@@ -24,16 +25,8 @@ Route::get('/', function () {
     return Auth::check() ? redirect('/thing') : view('top.top');
 })->name('top');
 
-// サンクスページを表示する
-Route::get('/thanks', function () {
-    // セッションに$show_thanksがない場合はトップページへリダイレクト
-    if (!session('show_thanks')) {
-        return redirect('/');
-    }
-    // フラグを削除する
-    session()->forget('show_thanks');
-    return view('thanks.thanks');
-});
+// サンクスページ
+Route::get('/thanks', ThanksController::class)->name('thanks');
 
 // ログインしている時だけアクセスできるルートをグループ化
 Route::middleware(['auth'])->group(function () {
