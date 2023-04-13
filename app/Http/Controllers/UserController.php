@@ -100,6 +100,9 @@ class UserController extends Controller
         // ユーザのthingも合わせて削除、withTrashed()で削除済みのthingも含めている
         $user->things()->withTrashed()->delete();
 
+        // サンクスページを表示させるフラグ
+        session(['show_thanks' => true]);
+
         // $userが削除され、存在しなければリダイレクトさせる
         if ($user->exists()) {
             return redirect('/thanks');
