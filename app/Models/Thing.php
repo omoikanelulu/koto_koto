@@ -47,7 +47,7 @@ class Thing extends Model
         ])
             ->orderBy('registration_date', 'desc')
             ->orderBy('id', 'desc')
-            ->paginate(10);
+            ->paginate(20);
 
         return $things;
     }
