@@ -17,7 +17,7 @@ class ThingPolicy
      * @param  \App\Models\Thing  $thing
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function accessCheck(User $user, Thing $thing)
+    public function confirmThingPermission(User $user, Thing $thing)
     {
         $result = ((int)$user->id === (int)$thing->user_id);
         return $result;
