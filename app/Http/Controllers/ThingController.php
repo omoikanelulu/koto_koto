@@ -44,20 +44,12 @@ class ThingController extends Controller
      */
     public function store(ThingRequest $request)
     {
-        // $is_deletedは不要だが、テーブルからカラムを削除する必要がある。手間がかかるので保留
-        $is_deleted = 0;
-
-        $thing_flag = $this->setThingFlag($request);
-
         $thing = new Thing();
         $thing->fill($request->all());
         $thing->user_id = Auth::user()->id;
         $thing->registration_date = date('Y-m-d H:i:s');
         //値がnullの場合、空文字にする
         $thing->bad_thing_workaround = $thing->bad_thing_workaround == null ? '' : $thing->bad_thing_workaround;
-        $thing->thing_flag = $thing_flag;
-        // $is_deletedは不要だが、テーブルからカラムを削除する必要がある。手間がかかるので保留
-        $thing->is_deleted = $is_deleted;
         $thing->save();
 
         return redirect(route('thing.index'));
@@ -115,12 +107,10 @@ class ThingController extends Controller
         // ポリシーでアクセスできるユーザであるかチェックする
         $this->authorize('confirmThingPermission', $thing);
 
-        $thing_flag = $this->setThingFlag($request);
 
         $thing->fill($request->all());
         //値がnullの場合、空文字にする
         $thing->bad_thing_workaround = $thing->bad_thing_workaround == null ? '' : $thing->bad_thing_workaround;
-        $thing->thing_flag = $thing_flag;
         $thing->save();
 
         return redirect(route('thing.show', $thing));
@@ -143,38 +133,6 @@ class ThingController extends Controller
         $thing->forceDelete(); //ハードデリート
 
         return redirect(route('thing.index'))->with('message', '削除しました');
-    }
-
-
-    /**
-     * good_thing_orderとbad_thing_orderで評価したかどうか組み合わせによって0から3の値を持つ
-     * good_thing_order評価無し、bad_thing_order評価無し、値は0
-     * good_thing_order評価あり、bad_thing_order評価無し、値は1
-     * good_thing_order評価あり、bad_thing_order評価無し、値は2
-     * good_thing_order評価あり、bad_thing_order評価あり、値は3
-     */
-    public function setThingFlag(ThingRequest $request)
-    {
-        $thing_flag = '';
-
-        // $good_thing_orderで評価していない場合
-        if ($request->good_thing_order == 0) {
-            // $bad_thing_orderで評価していない場合
-            if ($request->bad_thing_order == 0) {
-                $thing_flag = 0;
-            } else {
-                $thing_flag = 2;
-            }
-        } else {
-            // $bad_thing_orderで評価していない場合
-            if ($request->bad_thing_order == 0) {
-                $thing_flag = 1;
-            } else {
-                $thing_flag = 3;
-            }
-        }
-
-        return $thing_flag;
     }
 
     /**
@@ -202,7 +160,6 @@ class ThingController extends Controller
             $graphData[$date]['good_thing_order'] += $thing->good_thing_order;
             $graphData[$date]['bad_thing_order'] += $thing->bad_thing_order;
         }
-
         return view('monthlyLogs.monthlyLogs_graph', compact('graphData'));
     }
 }
