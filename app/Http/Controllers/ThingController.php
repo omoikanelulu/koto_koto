@@ -129,8 +129,8 @@ class ThingController extends Controller
         // ポリシーでアクセスできるユーザであるかチェックする
         $this->authorize('confirmThingPermission', $thing);
 
-        // $thing->delete(); //ソフトデリート
-        $thing->forceDelete(); //ハードデリート
+        $thing->delete(); //ソフトデリート
+        // $thing->forceDelete(); //ハードデリート
 
         return redirect(route('thing.index'))->with('message', '削除しました');
     }
