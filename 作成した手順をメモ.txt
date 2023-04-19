@@ -203,6 +203,58 @@ Route::get('/mycart', 'ShopController@myCart')->middleware('auth');
 クラスをインスタンス化したもの（newしたもの）のメソッドを呼び出すときは「->」、
 クラスのメソッドをstaticに呼び出すとき（staticなメソッドを呼び出すとき、つまり、newする必要がないとき）は「::」を使います。
 
+【authorizeメソッドとPolicy】
+ポリシーを利用して認可を確認する手順
+・ポリシーファイルの作成
+  php artisan make:policy ThingPolicy --model=Thing
+
+・ポリシーメソッドを実装
+  public function view(User $user, Thing $thing)
+  {
+    return $user->id === $thing->user_id;
+  }
+
+・ポリシーを登録する（app/Providers/AuthServiceProvider.php）
+  use App\Models\Thing;
+  use App\Policies\ThingPolicy;
+
+  // ...
+
+  public function boot()
+  {
+    $this->registerPolicies();
+
+    // モデルとポリシーを関連付ける
+    Gate::policy(Thing::class, ThingPolicy::class);
+  }
+
+・コントローラでポリシーを利用する
+public function show(Thing $thing)
+  {
+    // ログイン中のユーザーがリソースの所有者であるかどうかをチェック
+    $this->authorize('view', $thing);
+
+    // その他の処理
+  }
+
+これで、指定したアクションとリソースに対する認可が行われます。
+認可に失敗した場合、Laravelは自動的に403 Forbiddenレスポンスを生成する
+
+Laravelのポリシーファイルは、通常、リソースコントローラのアクション
+（index, create, store, show, edit, update, destroy）に対応するメソッド名が使用されます。
+これらのメソッドは、アクション名に対応する標準的な認可メソッドです。
+
+標準的なポリシーメソッド名の一覧は以下の通りです。
+
+viewAny：ユーザーがリソースの一覧を表示できるかを判断します。
+view：ユーザーが特定のリソースを表示できるかを判断します。
+create：ユーザーが新しいリソースを作成できるかを判断します。
+update：ユーザーが特定のリソースを更新できるかを判断します。
+delete：ユーザーが特定のリソースを削除できるかを判断します。
+restore：ユーザーが特定のリソースを復元できるかを判断します（論理削除が有効な場合）。
+forceDelete：ユーザーが特定のリソースを永久に削除できるかを判断します（論理削除が有効な場合）。
+これらのメソッドを実装して、コントローラでauthorizeメソッドを使用することで、リソースの認可を行うことができます。
+
 【Mailの返信】
 このコマンドで…
     php artisan make:mail Thanks --markdown="mails.thanks"
