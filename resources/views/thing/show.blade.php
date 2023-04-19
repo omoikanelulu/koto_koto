@@ -22,41 +22,6 @@
                 @endempty
             </table>
 
-            {{-- thing_flagが、存在する時の処理 --}}
-            @empty(!$thing->thing_flag)
-                <h5 class="border-bottom pb-1">当時のキモチ</h5>
-                <table class="table">
-                    <tr>
-                        @empty(!$thing->good_thing_order)
-                            @if ($thing->good_thing_order == 3)
-                                <td class="border-0">すごくイイ</td>
-                            @elseif ($thing->good_thing_order == 2)
-                                <td class="border-0">イイ</td>
-                            @elseif($thing->good_thing_order == 1)
-                                <td class="border-0">ちょっとイイ</td>
-                            @else
-                                <td class="border-0">{{ '' }}</td>
-                            @endif
-                        @endempty
-
-                        @empty(!$thing->bad_thing_order)
-                            @if ($thing->bad_thing_order == 3)
-                                <td class="border-0">すごくイヤ</td>
-                            @elseif ($thing->bad_thing_order == 2)
-                                <td class="border-0">イヤ</td>
-                            @elseif($thing->bad_thing_order == 1)
-                                <td class="border-0">ちょっとイヤ</td>
-                            @else
-                                <td class="border-0">{{ '' }}</td>
-                            @endif
-                        @endempty
-                    </tr>
-                </table>
-
-                {{-- 当日のグラフを表示する --}}
-                @include('graph.today_chart')
-            @endempty
-
             {{-- 操作ボタン --}}
             <table class="d-flex justify-content-end">
                 <tr>
@@ -78,7 +43,6 @@
                     </td>
                 </tr>
             </table>
-
         </div>
     </div>
 @endsection
