@@ -35,7 +35,8 @@
                     @empty(!$thing->bad_thing_workaround)
                         <tr class="d-flex justify-content-end">
                             <td class="bad-thing-workaround p-3 rounded-3">
-                                {!! nl2br(e($thing->bad_thing_workaround), false) !!}</td>
+                                {!! nl2br(e($thing->bad_thing_workaround), false) !!}
+                            </td>
                         </tr>
                     @endempty
                     <tr class="d-md-flex justify-content-end">
