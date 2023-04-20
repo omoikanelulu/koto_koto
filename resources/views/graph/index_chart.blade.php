@@ -8,7 +8,8 @@
                 @csrf
                 <div class="input-group mb-3">
                     <label class="input-group-text" for="start_date">開始日:</label>
-                    <input class="form-control" type="date" name="start_date" id="start_date" required>
+                    <input class="form-control" type="date" name="start_date" id="start_date" value="{{ $first_day_of_year }}"
+                        required>
                 </div>
                 <div class="input-group mb-3">
                     <label class="input-group-text" for="end_date">終了日:</label>
