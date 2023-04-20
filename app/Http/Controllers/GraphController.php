@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use App\Consts\AppDatesConst;
 use App\Consts\AppMessagesConst;
+use App\Helpers\AppDateHelper;
 use App\Models\Thing;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class GraphController extends Controller
 {
@@ -17,12 +17,14 @@ class GraphController extends Controller
     public function index()
     {
         // 当日の日付を格納
-        $today = AppDatesConst::today();
+        $today = AppDateHelper::getToday();
+        // 今年の年を格納
+        $first_day_of_year = AppDateHelper::getThisYear();
         // ユーザ情報を渡さないとログアウト以外のメニューが出ない
         $user = Auth::user();
         // 定数を格納
         $const = AppMessagesConst::INDEX_CHART;
-        return view('graph.index_chart', compact('today', 'user', 'const'));
+        return view('graph.index_chart', compact('today', 'first_day_of_year', 'user', 'const'));
     }
 
     /**
