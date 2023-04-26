@@ -35,6 +35,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/graph', [GraphController::class, 'index'])->name('graph.index_chart');
     Route::post('/graph/show_chart', [GraphController::class, 'show'])->name('graph.show_chart');
 
-    Route::resource('/user', UserController::class);
+    // exceptで不要なルーティングを使用不可にする
+    Route::resource('/user', UserController::class)->except([
+        'index', 'store', 'create'
+    ]);
     Route::resource('/thing', ThingController::class);
 });
