@@ -34,8 +34,8 @@
             </div>
             <div class="form-check">
                 <input class="form-check-input @error('good_thing_order') is-invalid @enderror" aria-describedby="validate"
-                    type="radio" name="good_thing_order" id="good_thing_order_1" value="3">
-                <label class="form-check-label" for="good_thing_order_1">すごくイイ</label>
+                    type="radio" name="good_thing_order" id="good_thing_order_3" value="3">
+                <label class="form-check-label" for="good_thing_order_3">すごくイイ</label>
             </div>
             <div class="form-check">
                 <input class="form-check-input @error('good_thing_order') is-invalid @enderror" aria-describedby="validate"
@@ -44,8 +44,8 @@
             </div>
             <div class="form-check">
                 <input class="form-check-input @error('good_thing_order') is-invalid @enderror" aria-describedby="validate"
-                    type="radio" name="good_thing_order" id="good_thing_order_3" value="1">
-                <label class="form-check-label" for="good_thing_order_3">ちょっとイイ</label>
+                    type="radio" name="good_thing_order" id="good_thing_order_1" value="1">
+                <label class="form-check-label" for="good_thing_order_1">ちょっとイイ</label>
             </div>
             @error('good_thing_order')
                 {{-- 何故だか上手く表示されないので、手動でstyleを指定 --}}
@@ -64,8 +64,8 @@
             </div>
             <div class="form-check form-check">
                 <input class="form-check-input @error('bad_thing_order') is-invalid @enderror" type="radio"
-                    name="bad_thing_order" id="bad_thing_order_1" value="3">
-                <label class="form-check-label" for="bad_thing_order_1">すごくイヤ</label>
+                    name="bad_thing_order" id="bad_thing_order_3" value="3">
+                <label class="form-check-label" for="bad_thing_order_3">すごくイヤ</label>
             </div>
             <div class="form-check form-check">
                 <input class="form-check-input @error('bad_thing_order') is-invalid @enderror" type="radio"
@@ -74,8 +74,8 @@
             </div>
             <div class="form-check form-check">
                 <input class="form-check-input @error('bad_thing_order') is-invalid @enderror" type="radio"
-                    name="bad_thing_order" id="bad_thing_order_3" value="1">
-                <label class="form-check-label" for="bad_thing_order_3">ちょっとイヤ</label>
+                    name="bad_thing_order" id="bad_thing_order_1" value="1">
+                <label class="form-check-label" for="bad_thing_order_1">ちょっとイヤ</label>
             </div>
             @error('bad_thing_order')
                 {{-- 何故だか上手く表示されないので、手動でstyleを指定 --}}
