@@ -1,3 +1,11 @@
+## koto-koto
+
+製作期間：2022/12/01から2023/04/27まで
+
+今後の改善点：
+- パスワード変更機能の実装
+- 記録した内容に対しての評価がすぐに分からない、使用感の改善
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
