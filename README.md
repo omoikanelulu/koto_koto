@@ -22,11 +22,7 @@ koto-kotoは毎日の出来事や感情を記録し、心の健康を維持す�
 ストレスコーピングをうまく行うことでストレスの影響を軽減し、より健康的な生活を送ることが出来る
 
 ## 開発環境：
-Composer 2.4.2
-Laravel Framework 9.42.2
-PHP 8.0.19
-npm 9.1.1
-SQLite
+Composer 2.4.2  Laravel Framework 9.42.2  PHP 8.0.19  npm 9.1.1  Git  SQLite
 
 ## 製作期間：
 2022/12/01から2023/04/27まで
@@ -34,6 +30,7 @@ SQLite
 ## 今後の改善点：
 - パスワード変更機能の実装
 - 記録した内容に対しての評価がすぐに分からない、使用感の改善
+- グラフの表示サイズを、表示期間にかかわらず一定にする
 
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
