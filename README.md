@@ -22,7 +22,12 @@ koto-kotoは毎日の出来事や感情を記録し、心の健康を維持す�
 ストレスコーピングをうまく行うことでストレスの影響を軽減し、より健康的な生活を送ることが出来る
 
 ## 開発環境：
-Composer 2.4.2  Laravel Framework 9.42.2  PHP 8.0.19  npm 9.1.1  Git  SQLite
+Composer 2.4.2<br>
+Laravel Framework 9.42.2<br>
+PHP 8.0.19<br>
+npm 9.1.1<br>
+Git<br>
+SQLite
 
 ## 製作期間：
 2022/12/01から2023/04/27まで
