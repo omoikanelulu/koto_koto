@@ -324,6 +324,20 @@ git config -l（またはgit config --list）で、
 GitHubのリモートリポジトリからcloneのコマンドをコピーする事も出来る
 ローカルの端末でGitの設定を終わらせていれば、これだけでプッシュも出来るようになる。
 
+【GitHubからclone後にする手順】
+依存関係をインストールする
+    composer.jsonがあるディレクトリで
+        composer install
+    これで依存関係がインストールされる
+
+envファイルの設定
+    env.exampleをコピーしてenvファイルを作成する
+
+アプリケーションキーの作成
+    php artisan key:generate
+
+マイグレーションとシーディングを行い、ローカルサーバを立ち上げる
+
 【XAMPPのインストールし直し覚書】
 XAMPPのアンインストール
     sudo /opt/lampp/lampp stop //XAMPPの停止
