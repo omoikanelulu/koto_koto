@@ -9,10 +9,10 @@
             <div class="card-body">
                 <h4 class="card-title">{{ config('app.name', 'Laravel') }}とは？</h4>
                 <p class="card-text ms-3">
-                    {!! App\consts\AppMessagesConst::INTRODUCTION !!}
+                    {!! App\Consts\AppMessagesConst::INTRODUCTION !!}
                 </p>
                 <p class="card-text ms-3">
-                    {!! App\consts\AppMessagesConst::GLOSSARY !!}
+                    {!! App\Consts\AppMessagesConst::GLOSSARY !!}
                 </p>
                 <a class="btn btn-primary" href="{{ route('login') }}">{{ __('Login') }}</a>
                 <a class="btn btn-outline-info" href="{{ route('register') }}">{{ __('Register') }}</a>
