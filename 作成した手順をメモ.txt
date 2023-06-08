@@ -328,7 +328,11 @@ GitHubのリモートリポジトリからcloneのコマンドをコピーする
 依存関係をインストールする
     composer.jsonがあるディレクトリで
         composer install
-    これで依存関係がインストールされる
+    これでPHPの依存関係がインストールされる
+
+    package.jsonがあるディレクトリで
+        npm install
+    これでJavaScriptの依存関係がインストールされる
 
 envファイルの設定
     env.exampleをコピーしてenvファイルを作成する
@@ -337,6 +341,33 @@ envファイルの設定
     php artisan key:generate
 
 マイグレーションとシーディングを行い、ローカルサーバを立ち上げる
+
+【node.jsをインストールし直した覚書】
+node.jsがインストールされているにも関わらず、npmがインストールされていない状況に陥ったため、
+node.jsをアンインストールしてからインストールした
+    which node
+    /usr/local/bin/node
+whichコマンドで、nodeのインストール場所を確認し
+    sudo rm -rf /usr/local/bin/node
+アンインストールする
+
+aptでインストールするために、旧バージョンのnode.jsパッケージを扱っているリポジトリをシステムに追加する
+    curl -sL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+そして、パッケージをインストール
+    sudo apt install -y nodejs
+これでnode.jsとそれに付随するnpmのインストールが完了した。
+    omoikane@penguin:~$ node -v
+    v18.16.0
+    omoikane@penguin:~$ npm -v
+    9.5.1
+
+【sudo apt upgradeで最新版にupdateされないようにする方法】
+このコマンドでパッケージのバージョンを固定できる
+    sudo apt-mark hold nodejs
+固定を解除するには
+    sudo apt-mark unhold nodejs
+固定しているパッケージの一覧を表示させるには
+    sudo apt-mark showhold
 
 【XAMPPのインストールし直し覚書】
 XAMPPのアンインストール
