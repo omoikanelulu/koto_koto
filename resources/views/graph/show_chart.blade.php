@@ -8,7 +8,7 @@
         <style>
             /* canvas要素の高さを調整 */
             #user_chart {
-                max-height: 100%;
+                max-height: 70%;
                 max-width: 100%;
             }
         </style>
@@ -38,6 +38,8 @@
                             borderColor: 'rgba(75, 192, 192, 1)',
                             borderWidth: 1,
                             stack: 'stack1',
+                            categoryPercentage: 0.5, // カテゴリー全体の幅の割合を指定
+                            barPercentage: 1.0, // 個々のカテゴリー内での棒の幅の割合を指定
                         },
                         {
                             label: 'Bad Thing Order',
@@ -46,6 +48,8 @@
                             borderColor: 'rgba(255, 99, 132, 1)',
                             borderWidth: 1,
                             stack: 'stack1',
+                            categoryPercentage: 0.5, // カテゴリー全体の幅の割合を指定
+                            barPercentage: 1.0, // 個々のカテゴリー内での棒の幅の割合を指定
                         },
                     ],
                 },
