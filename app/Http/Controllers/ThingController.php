@@ -32,8 +32,8 @@ class ThingController extends Controller
     public function create()
     {
         $user = Auth::user();
-
-        return view('thing.create', compact('user'));
+        $method = 'create';
+        return view('thing.createOrEdit', compact('user', 'method'));
     }
 
     /**
@@ -87,10 +87,9 @@ class ThingController extends Controller
     public function edit(Thing $thing)
     {
         $this->authorize('confirmThingPermission', $thing);
-
         $user = Auth::user();
-
-        return view('thing.edit', compact('thing', 'user'));
+        $method = 'edit';
+        return view('thing.createOrEdit', compact('thing', 'user', 'method'));
     }
 
     /**
