@@ -35,15 +35,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/graph', [GraphController::class, 'index'])->name('graph.index_chart');
     Route::post('/graph/show_chart', [GraphController::class, 'show'])->name('graph.show_chart');
 
-    // デキゴト入力と編集のメソッドをひとつのメソッドで処理する
-    Route::get('/thing/create', [ThingController::class, 'createOrEdit'])->name('thing.create');
-    Route::get('/thing/{id}/edit', [ThingController::class, 'createOrEdit'])->name('thing.edit');
-
     // exceptで不要なルーティングを除外する
     Route::resource('/user', UserController::class)->except([
         'index', 'store', 'create'
     ]);
-    Route::resource('/thing', ThingController::class)->except([
-        'create', 'edit'
-    ]);
+
+    Route::resource('/thing', ThingController::class);
 });
