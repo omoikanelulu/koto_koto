@@ -13,6 +13,8 @@ class ThingPolicy
     /**
      * Determine whether the user can access the model.
      *
+     * ThingがUserに属しているかチェックする
+     *
      * @param  \App\Models\User  $user
      * @param  \App\Models\Thing  $thing
      * @return \Illuminate\Auth\Access\Response|bool
