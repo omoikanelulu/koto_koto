@@ -24,14 +24,38 @@
             @endif
             <table>
                 @foreach ($things as $thing)
+                    {{-- 入力日時の表示 --}}
                     <tr>
-                        <th class="vw-100">
-                            <h4 class="right-bg-line">{{ $thing->registration_date }}</h4>
+                        <th class="vw-100 d-flex align-items-center right-bg-line">
+                            <time datetime="$thing->registration_date" class="fs-4">
+                                {{ $thing->registration_date }}
+                            </time>
+                            {{-- デキゴトを評価を視覚化するためのアイコンを表示させる --}}
+                            @empty(!$thing->good_thing_order)
+                                <div class="thing-good-icon">
+                                    @for ($i = 0; $i < $thing->good_thing_order; $i++)
+                                        <span>
+                                            <img src="{{ asset('images/icons/good_icon.svg') }}">
+                                        </span>
+                                    @endfor
+                                </div>
+                            @endempty
+                            @empty(!$thing->bad_thing_order)
+                                <div class="thing-bad-icon">
+                                    @for ($i = 0; $i < $thing->bad_thing_order; $i++)
+                                        <span>
+                                            <img src="{{ asset('images/icons/bad_icon.svg') }}">
+                                        </span>
+                                    @endfor
+                                </div>
+                            @endempty
                         </th>
                     </tr>
+                    {{-- デキゴトの表示 --}}
                     <tr>
                         <td class="thing">{!! nl2br(e($thing->thing), false) !!}</td>
                     </tr>
+                    {{-- タイサクの表示 --}}
                     @empty(!$thing->bad_thing_workaround)
                         <tr class="d-flex justify-content-end">
                             <td class="bad-thing-workaround p-3 rounded-3">
@@ -39,6 +63,7 @@
                             </td>
                         </tr>
                     @endempty
+                    {{-- 処理ボタンの表示 --}}
                     <tr class="d-md-flex justify-content-end">
                         <td>
                             <div class="operation-buttons py-3">
@@ -60,6 +85,7 @@
                 @endforeach
             </table>
         </div>
+        {{-- ペジネーション --}}
         <div class="d-flex justify-content-center text-center"style="width: 500px;margin: 20px auto;">
             {{-- appends()で検索条件を引き継いでいる --}}
             {{ $things->appends(request()->input())->links() }}
