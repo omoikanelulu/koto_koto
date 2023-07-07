@@ -30,25 +30,8 @@
                             <time datetime="$thing->registration_date" class="fs-4">
                                 {{ $thing->registration_date }}
                             </time>
-                            {{-- デキゴトを評価を視覚化するためのアイコンを表示させる --}}
-                            @empty(!$thing->good_thing_order)
-                                <div class="thing-good-icon">
-                                    @for ($i = 0; $i < $thing->good_thing_order; $i++)
-                                        <span>
-                                            <img src="{{ asset('images/icons/good_icon.svg') }}">
-                                        </span>
-                                    @endfor
-                                </div>
-                            @endempty
-                            @empty(!$thing->bad_thing_order)
-                                <div class="thing-bad-icon">
-                                    @for ($i = 0; $i < $thing->bad_thing_order; $i++)
-                                        <span>
-                                            <img src="{{ asset('images/icons/bad_icon.svg') }}">
-                                        </span>
-                                    @endfor
-                                </div>
-                            @endempty
+                            {{-- アイコンを表示させるコンポーネントの呼び出し --}}
+                            <x-icon-display :thing="$thing" />
                         </th>
                     </tr>
                     {{-- デキゴトの表示 --}}
