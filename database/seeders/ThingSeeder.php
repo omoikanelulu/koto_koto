@@ -12,7 +12,7 @@ class ThingSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     * 生成したシーダー
+     *
      * @return void
      */
     public function run()
