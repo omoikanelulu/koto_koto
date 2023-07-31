@@ -16,6 +16,7 @@
                 </p>
                 <a class="btn btn-primary" href="{{ route('login') }}">{{ __('Login') }}</a>
                 <a class="btn btn-outline-info" href="{{ route('register') }}">{{ __('Register') }}</a>
+                <a class="btn btn-outline-danger" href="{{ route('inquiry') }}">お問い合わせ</a>
             </div>
         </div>
     </div>
