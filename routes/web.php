@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GraphController;
+use App\Http\Controllers\InquiryController;
 use App\Http\Controllers\ThanksController;
 use App\Http\Controllers\ThingController;
 use App\Http\Controllers\UserController;
@@ -27,6 +28,11 @@ Route::get('/', function () {
 
 // サンクスページ
 Route::get('/thanks', ThanksController::class)->name('thanks');
+
+// 問い合わせフォームのページ
+Route::get('/inquiry', [InquiryController::class, 'index'])->name('inquiry');
+// 登録処理
+Route::post('/inquiry', [InquiryController::class, 'store'])->name('inquiry.store');
 
 // ログインしている時だけアクセスできるルートをグループ化
 Route::middleware(['auth'])->group(function () {
