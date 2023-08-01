@@ -18,8 +18,9 @@ return new class extends Migration
             $table->string('name')->comment('氏名');
             $table->string('email')->unique()->comment('メールアドレス');
             $table->text('inquiry')->comment('問い合わせ内容');
-            $table->integer('status')->comment('対応状況');
+            $table->integer('status')->default(0)->comment('対応状況');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
