@@ -26,7 +26,7 @@ class InquiryController extends Controller
         return redirect(route('inquiry'));
     }
 
-    public function delete($id)
+    public function destroy($id)
     {
         $inquiry = Inquiry::find($id);
         $inquiry->delete();
