@@ -22,11 +22,9 @@ class ThingSeeder extends Seeder
             Thing::create([
                 'user_id' => 1,
                 'thing' => 'これはテスト用のデータです。' . $i,
-                'thing_flag' => rand(0, 3),
                 'good_thing_order' => rand(1, 3),
                 'bad_thing_order' => rand(1, 3),
                 'bad_thing_workaround' => 'これはテスト用のデータです。' . $i,
-                'is_deleted' => rand(0, 1),
                 'registration_date' => date('Y:m:d H:i:s', strtotime('-' . $i . ' day')),
             ]);
         }
