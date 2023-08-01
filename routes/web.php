@@ -33,6 +33,8 @@ Route::get('/thanks', ThanksController::class)->name('thanks');
 Route::get('/inquiry', [InquiryController::class, 'index'])->name('inquiry');
 // 登録処理
 Route::post('/inquiry', [InquiryController::class, 'store'])->name('inquiry.store');
+// 削除処理
+Route::post('/destroy/{id}', [InquiryController::class, 'destroy'])->name('inquiry.destroy');
 
 // ログインしている時だけアクセスできるルートをグループ化
 Route::middleware(['auth'])->group(function () {
