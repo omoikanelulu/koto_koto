@@ -31,8 +31,7 @@
         <div class="col-lg-6 offset-lg-3">
             <label for="inquiry" class="form-label">お問い合わせ内容</label>
             <textarea class="form-control @error('inquiry') is-invalid @enderror" aria-describedby="validateInquiry" name="inquiry"
-                id="inquiry" cols="30" rows="10" wrap="hard" placeholder="お問い合わせ内容を入力">{{ old('inquiry', $inquiry->inquiry ?? '') }}
-            </textarea>
+                id="inquiry" cols="30" rows="10" wrap="hard" placeholder="お問い合わせ内容を入力">{{ old('inquiry', $inquiry->inquiry ?? '') }}</textarea>
             @error('inquiry')
                 <div class="invalid-feedback" id="validateInquiry">
                     {{ $message }}
