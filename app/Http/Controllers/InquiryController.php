@@ -7,9 +7,24 @@ use Illuminate\Http\Request;
 
 class InquiryController extends Controller
 {
+    /**
+     * お問い合わせフォーム
+     *
+     * @return view
+     */
+    public function form()
+    {
+        return view('inquiry.form');
+    }
+
+    /**
+     * お問い合わせ一覧画面
+     *
+     * @return view
+     */
     public function index()
     {
-        return view('inquiry.inquiryForm');
+        return view('inquiry.index');
     }
 
     /**
@@ -23,7 +38,7 @@ class InquiryController extends Controller
         $inquiry->fill($request->all());
         $inquiry->save();
 
-        return redirect(route('inquiry'));
+        return redirect(route('inquiry.form'));
     }
 
     public function destroy($id)
@@ -31,6 +46,6 @@ class InquiryController extends Controller
         $inquiry = Inquiry::find($id);
         $inquiry->delete();
 
-        return redirect(route('inquiry'));
+        return redirect(route('inquiry.index'));
     }
 }
