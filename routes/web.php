@@ -29,12 +29,16 @@ Route::get('/', function () {
 // サンクスページ
 Route::get('/thanks', ThanksController::class)->name('thanks');
 
-// 問い合わせフォームのページ
-Route::get('/inquiry', [InquiryController::class, 'index'])->name('inquiry');
-// 登録処理
-Route::post('/inquiry', [InquiryController::class, 'store'])->name('inquiry.store');
-// 削除処理
-Route::post('/destroy/{id}', [InquiryController::class, 'destroy'])->name('inquiry.destroy');
+Route::group(['prefix' => 'inquiry'], function () {
+    // 問い合わせフォーム
+    Route::get('/form', [InquiryController::class, 'form'])->name('inquiry.form');
+    // お問い合わせ一覧表示
+    Route::get('/index', [InquiryController::class, 'index'])->name('inquiry.index');
+    // 登録処理
+    Route::post('/store', [InquiryController::class, 'store'])->name('inquiry.store');
+    // 削除処理
+    Route::post('/destroy/{id}', [InquiryController::class, 'destroy'])->name('inquiry.destroy');
+});
 
 // ログインしている時だけアクセスできるルートをグループ化
 Route::middleware(['auth'])->group(function () {
