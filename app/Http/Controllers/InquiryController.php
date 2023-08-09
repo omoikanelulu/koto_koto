@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Inquiry;
+use Illuminate\Auth\Middleware\Authorize;
 use Illuminate\Http\Request;
 
 class InquiryController extends Controller
@@ -24,6 +25,9 @@ class InquiryController extends Controller
      */
     public function index()
     {
+        // Inquiryモデルに対してviewAnyポリシーを適用、結果がfalseの場合、403 Forbiddenとなる
+        $this->authorize('viewAny', Inquiry::class);
+
         return view('inquiry.index');
     }
 
