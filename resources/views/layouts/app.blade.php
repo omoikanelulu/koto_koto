@@ -113,6 +113,12 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    @if (Auth::user()->is_admin === 1)
+                                        <a class="dropdown-item" href="{{ route('inquiry.index') }}">
+                                            お問い合わせ一覧を表示
+                                        </a>
+                                    @endif
+
                                     @if (isset($user))
                                         <a class="dropdown-item" href="{{ route('user.show', $user) }}">
                                             ユーザ情報
