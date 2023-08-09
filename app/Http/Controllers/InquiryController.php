@@ -23,12 +23,13 @@ class InquiryController extends Controller
      *
      * @return view
      */
-    public function index()
+    public function index(Inquiry $inquiry)
     {
         // Inquiryモデルに対してviewAnyポリシーを適用、結果がfalseの場合、403 Forbiddenとなる
         $this->authorize('viewAny', Inquiry::class);
+        $inquiries = Inquiry::all();
 
-        return view('inquiry.index');
+        return view('inquiry.index', compact('inquiries'));
     }
 
     /**
