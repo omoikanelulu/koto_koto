@@ -12,13 +12,15 @@ class InquiryPolicy
 
     /**
      * Determine whether the user can view any models.
+     * ユーザのis_adminの値が「1」である場合trueが返される
      *
      * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function viewAny(User $user)
     {
-        //
+        $result = ((int)$user->is_admin === 1);
+        return $result;
     }
 
     /**
