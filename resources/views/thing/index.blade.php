@@ -24,42 +24,47 @@
             @endif
             <table>
                 @foreach ($things as $thing)
-                    <tr>
-                        <th class="vw-100">
-                            <h4 class="right-bg-line">{{ $thing->registration_date }}</h4>
-                        </th>
-                    </tr>
-                    <tr>
-                        <td class="thing">{!! nl2br(e($thing->thing), false) !!}</td>
-                    </tr>
+                    {{-- 入力日時の表示 --}}
+                    <div class="d-flex align-items-center right-bg-line">
+                        <div>
+                            <time datetime="$thing->registration_date" class="fs-4">
+                                {{ $thing->registration_date }}
+                            </time>
+                        </div>
+                        {{-- アイコンを表示させるコンポーネントの呼び出し --}}
+                        <x-icon-display :thing="$thing" />
+                    </div>
+                    {{-- デキゴトのコンポーネント呼び出し --}}
+                    <div class="thing">
+                        <p>{!! nl2br(e($thing->thing), false) !!}</p>
+                    </div>
+                    {{-- タイサクのコンポーネント呼び出し --}}
                     @empty(!$thing->bad_thing_workaround)
-                        <tr class="d-flex justify-content-end">
-                            <td class="bad-thing-workaround p-3 rounded-3">
-                                {!! nl2br(e($thing->bad_thing_workaround), false) !!}
-                            </td>
-                        </tr>
+                        <div class="d-flex justify-content-end">
+                            <x-bad-thing-workaround-display :thing="$thing" />
+                        </div>
                     @endempty
-                    <tr class="d-md-flex justify-content-end">
-                        <td>
-                            <div class="operation-buttons py-3">
-                                <a href="{{ route('thing.show', $thing) }}" class="text-decoration-none">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">詳細</button>
-                                </a>
-                                <a href="{{ route('thing.edit', $thing) }}" class="text-decoration-none">
-                                    <button type="button" class="btn btn-sm btn-outline-warning">修正</button>
-                                </a>
-                                <form class="d-inline" action="{{ route('thing.destroy', $thing) }}" method="post">
-                                    @method('DELETE')
-                                    @csrf
-                                    <button type="submit" onclick="return confirm('削除しますか？この処理は取り消せません');"
-                                        class="btn-sm btn btn-outline-danger">削除</button>
-                                </form>
-                            </div>
-                        </td>
-                    </tr>
+                    {{-- 処理ボタンの表示 --}}
+                    <div class="d-md-flex justify-content-end">
+                        <div class="operation-buttons py-3">
+                            <a href="{{ route('thing.show', $thing) }}" class="text-decoration-none">
+                                <button type="button" class="btn btn-sm btn-outline-secondary">詳細</button>
+                            </a>
+                            <a href="{{ route('thing.edit', $thing) }}" class="text-decoration-none">
+                                <button type="button" class="btn btn-sm btn-outline-warning">修正</button>
+                            </a>
+                            <form class="d-inline" action="{{ route('thing.destroy', $thing) }}" method="post">
+                                @method('DELETE')
+                                @csrf
+                                <button type="submit" onclick="return confirm('削除しますか？この処理は取り消せません');"
+                                    class="btn-sm btn btn-outline-danger">削除</button>
+                            </form>
+                        </div>
+                    </div>
                 @endforeach
             </table>
         </div>
+        {{-- ペジネーション --}}
         <div class="d-flex justify-content-center text-center"style="width: 500px;margin: 20px auto;">
             {{-- appends()で検索条件を引き継いでいる --}}
             {{ $things->appends(request()->input())->links() }}
