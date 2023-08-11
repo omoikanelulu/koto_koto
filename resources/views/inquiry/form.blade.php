@@ -40,7 +40,7 @@
         </div>
 
         <div class="col-lg-6 offset-lg-3">
-            <button type="submit" class="btn btn-sm btn-primary">送信する</button>
+            <button type="submit" class="btn btn-sm btn-primary" onclick="return confirm('送信してよろしいですか？');">送信する</button>
             <a href="{{ route('top') }}">
                 <button type="button" class="btn btn-sm btn-secondary">戻る</button>
             </a>
