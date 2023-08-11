@@ -36,6 +36,8 @@ Route::group(['prefix' => 'inquiry'], function () {
     Route::get('/index', [InquiryController::class, 'index'])->name('inquiry.index');
     // 登録処理
     Route::post('/store', [InquiryController::class, 'store'])->name('inquiry.store');
+    // 登録完了画面
+    Route::get('/form/complete', [InquiryController::class, 'complete'])->name('inquiry.complete');
     // 削除処理
     Route::post('/destroy/{id}', [InquiryController::class, 'destroy'])->name('inquiry.destroy');
 });

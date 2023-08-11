@@ -35,7 +35,7 @@ class InquiryController extends Controller
     /**
      * お問い合わせの登録処理
      *
-     * @return void
+     * @return redirectResponse
      */
     public function store(Request $request)
     {
@@ -43,11 +43,34 @@ class InquiryController extends Controller
         $inquiry->fill($request->all());
         $inquiry->save();
 
-        return redirect(route('inquiry.form'));
+        // セッションにフラッシュデータとしてリクエストのデータを保存
+        session()->flash('inquiry', $inquiry);
+
+        return redirect(route('inquiry.complete'))->with('message', 'お問い合わせを送信しました');
     }
 
+    /**
+     * お問い合わせ完了画面
+     *
+     * @return view
+     */
+    public function complete(Request $request)
+    {
+        $inquiry = session('inquiry');
+
+        return view('inquiry.complete', compact('inquiry'));
+    }
+
+    /**
+     * 削除処理
+     *
+     * @return redirectResponse
+     */
     public function destroy($id)
     {
+        // Inquiryモデルに対してviewAnyポリシーを適用、結果がfalseの場合、403 Forbiddenとなる
+        $this->authorize('viewAny', Inquiry::class);
+
         $inquiry = Inquiry::find($id);
         $inquiry->delete();
 
