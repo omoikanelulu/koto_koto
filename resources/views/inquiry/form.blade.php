@@ -7,8 +7,7 @@
         <div class="col-lg-6 offset-lg-3">
             <label for="name" class="form-label">氏名</label>
             <input class="form-control @error('name') is-invalid @enderror" aria-describedby="validateName" name="name"
-                id="name" placeholder="氏名を入力">{{ old('name', $inquiry->name ?? '') }}
-            </input>
+                id="name" placeholder="氏名を入力" value="{{ old('name', $inquiry->name ?? '') }}">
             @error('name')
                 <div class="invalid-feedback" id="validateName">
                     {{ $message }}
@@ -19,8 +18,7 @@
         <div class="col-lg-6 offset-lg-3">
             <label for="email" class="form-label">メールアドレス</label>
             <input class="form-control @error('email') is-invalid @enderror" aria-describedby="validateEmail" name="email"
-                id="email" placeholder="メールアドレスを入力">{{ old('email', $inquiry->email ?? '') }}
-            </input>
+                id="email" placeholder="メールアドレスを入力" value="{{ old('email', $inquiry->email ?? '') }}">
             @error('email')
                 <div class="invalid-feedback" id="validateEmail">
                     {{ $message }}
