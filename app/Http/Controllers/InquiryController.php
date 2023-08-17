@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\InquiryRequest;
 use App\Models\Inquiry;
 use Illuminate\Auth\Middleware\Authorize;
 use Illuminate\Http\Request;
@@ -37,7 +38,7 @@ class InquiryController extends Controller
      *
      * @return redirectResponse
      */
-    public function store(Request $request)
+    public function store(InquiryRequest $request)
     {
         $inquiry = new Inquiry();
         $inquiry->fill($request->all());
