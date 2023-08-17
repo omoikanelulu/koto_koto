@@ -7,16 +7,16 @@
     @foreach ($inquiries as $inquiry)
         <div class="mb-5">
             <div class="col-lg-10 offset-lg-1">
-                <label>お問い合わせID : {{ $inquiry->id }}</label>
+                <p>お問い合わせID : {{ $inquiry->id }}</p>
             </div>
             <div class="col-lg-10 offset-lg-1">
-                <label>氏名 : {{ $inquiry->name }}</label>
+                <p>氏名 : {{ $inquiry->name }}</p>
             </div>
             <div class="col-lg-10 offset-lg-1">
-                <label>メールアドレス : {{ $inquiry->email }}</label>
+                <p>メールアドレス : {{ $inquiry->email }}</p>
             </div>
             <div class="col-lg-10 offset-lg-1">
-                <label for="inquiry">お問い合わせ内容 : </label>
+                <p for="inquiry">お問い合わせ内容 : </p>
                 <textarea class="form-control" name="inquiry" id="inquiry" cols="30" rows="5" wrap="hard" disabled>{{ $inquiry->inquiry }}</textarea>
             </div>
         </div>
