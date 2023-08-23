@@ -43,6 +43,7 @@ class GraphController extends Controller
         // ログインユーザのthingを指定された期間分取得する
         $things = Thing::where('user_id', $userId)
             ->whereBetween('registration_date', [$startDate, $endDate])
+            ->orderBy('registration_date', 'desc')
             ->get();
 
         // グラフデータを作成する
