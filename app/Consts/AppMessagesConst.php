@@ -29,6 +29,8 @@ class AppMessagesConst
 
     const SHOW_CHART = [
         'title' => '指定期間をグラフ表示',
+        'good_thing_order' => 'イイコト',
+        'bad_thing_order' => 'ヤナコト',
         'back' => '戻る',
     ];
 }
