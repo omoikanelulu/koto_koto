@@ -367,6 +367,32 @@ aptでインストールするために、旧バージョンのnode.jsパッケ�
     sudo sysctl -w net.ipv6.conf.all.disable_ipv6=1
     sudo sysctl -w net.ipv6.conf.default.disable_ipv6=1
 
+元に戻す場合は以下のようになる。
+    sudo sysctl -w net.ipv6.conf.all.disable_ipv6=0
+    sudo sysctl -w net.ipv6.conf.default.disable_ipv6=0
+
+また、現在IPv6が有効なのかどうかを確認するコマンドは、
+    ip addr show
+このコマンドを実行し、表示された情報に fe80::/10 という、IPアドレスが含まれている場合は、IPv6が有効になっている。
+例えばこのように表示される。
+    inet6 fe80::216:3eff:fea6:8e32/64 scope link
+
+システム全体のIPv6は有効し、npmパッケージのダウンロードにのみIPv4を利用するために以下のコマンドを実行
+    export npm_config_force_ipv4=1
+このコマンドを実行後システムを再起動し、npm installすることで動作した。
+
+これは、環境変数 npm_config_force_ipv4 を 1 に設定します。
+この環境変数は、npm のパッケージをダウンロードする際に使用するネットワークプロトコルを指定します。
+npm_config_force_ipv4 を 1 に設定すると、npm のパッケージのダウンロードは IPv4 の通信でのみ行われ、IPv6 の通信は使用されません。
+元に戻す必要がある場合は、以下の手順を実行します。
+    unset npm_config_force_ipv4
+
+【システムの再起動コマンド】
+コマンドでもシステムを再起動出来るようだが、
+    sudo reboot
+自分の環境の場合、これを行うとLinuxの環境が起動しなくなったので、やめておくことを激しく推奨する！
+ターミナルのアイコン右クリックから、Linuxのシャットダウンを行うことで、無事に起動できた。（焦った）
+
 【sudo apt upgradeで最新版にupdateされないようにする方法】
 このコマンドでパッケージのバージョンを固定できる
     sudo apt-mark hold nodejs
